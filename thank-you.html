@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to RIKU — You're In</title>
+<meta name="robots" content="noindex">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;background:#080810;color:#fff;font-family:'Inter',-apple-system,sans-serif}
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+
+  /* Particles */
+  .particle{position:fixed;border-radius:50%;pointer-events:none;animation:float linear infinite}
+  @keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh) scale(1);opacity:0}}
+
+  .container{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center;position:relative;z-index:1}
+
+  .checkmark{width:72px;height:72px;background:rgba(16,185,129,0.12);border:2px solid rgba(16,185,129,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 28px;animation:pop 0.5s cubic-bezier(0.175,0.885,0.32,1.275)}
+  @keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
+
+  h1{font-size:clamp(40px,8vw,72px);font-weight:900;letter-spacing:-2px;line-height:1;margin-bottom:12px}
+  h1 span{color:#e63946}
+  .subtitle{font-size:clamp(15px,3vw,18px);color:rgba(255,255,255,0.5);max-width:420px;line-height:1.6;margin-bottom:48px}
+
+  .telegram-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:32px 28px;max-width:460px;width:100%;margin-bottom:24px;backdrop-filter:blur(16px)}
+  .telegram-card .label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:16px}
+  .telegram-card h2{font-size:22px;font-weight:700;margin-bottom:8px}
+  .telegram-card p{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.6;margin-bottom:24px}
+
+  .tg-btn{display:flex;align-items:center;justify-content:center;gap:12px;background:#e63946;color:#fff;text-decoration:none;font-weight:700;font-size:16px;border-radius:14px;padding:16px 28px;width:100%;transition:transform 0.15s,box-shadow 0.15s;box-shadow:0 8px 24px rgba(230,57,70,0.35)}
+  .tg-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(230,57,70,0.45)}
+  .tg-btn:active{transform:scale(0.97)}
+  .tg-icon{width:28px;height:28px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .tg-icon svg{width:16px;height:16px;fill:#e63946}
+
+  .note{font-size:12px;color:rgba(255,255,255,0.2);max-width:360px;line-height:1.6;margin-top:8px}
+
+  .chapters-note{background:rgba(230,57,70,0.06);border:1px solid rgba(230,57,70,0.15);border-radius:12px;padding:16px 20px;max-width:460px;width:100%;text-align:left;margin-bottom:32px}
+  .chapters-note p{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6}
+  .chapters-note strong{color:#e63946}
+
+  footer{margin-top:48px;font-size:12px;color:rgba(255,255,255,0.15)}
+  footer a{color:rgba(255,255,255,0.25);text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="checkmark">✓</div>
+
+  <h1>Welcome to<br><span>RIKU</span></h1>
+  <p class="subtitle">Your subscription is confirmed. You're now part of the inner circle. 🗡️</p>
+
+  <div class="chapters-note">
+    <p><strong>What you get:</strong> Every chapter of Book 1 as it's released — posted directly in your private Telegram channel. Book 2 "Red Blood Moon" drops <strong>April 15</strong>.</p>
+  </div>
+
+  <div class="telegram-card">
+    <div class="label">Your Access</div>
+    <h2>Join the Private Channel</h2>
+    <p>All chapters are posted here first. Tap below to join — this link is for subscribers only.</p>
+    <a href="https://t.me/+4CHR6e3nw6I0NzYx" class="tg-btn" target="_blank" rel="noopener">
+      <div class="tg-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 13.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.828.942z"/></svg>
+      </div>
+      Join RIKU Telegram →
+    </a>
+    <p class="note" style="margin-top:16px;text-align:center">Can't tap? Copy this link: t.me/+4CHR6e3nw6I0NzYx</p>
+  </div>
+
+  <p class="note">Manage your subscription anytime at <a href="https://billing.stripe.com/p/login" style="color:rgba(255,255,255,0.35);text-decoration:underline">billing.stripe.com</a></p>
+
+  <footer>
+    <a href="/">← Back to RIKU</a> · <a href="mailto:labs@vobius.com">Support</a>
+  </footer>
+</div>
+
+<script>
+// Spawn crimson particles
+(function(){
+  for(var i=0;i<18;i++){
+    var p=document.createElement('div');
+    p.className='particle';
+    var size=Math.random()*4+2;
+    p.style.cssText='width:'+size+'px;height:'+size+'px;left:'+Math.random()*100+'vw;background:rgba(230,57,70,'+(Math.random()*0.4+0.1)+');animation-duration:'+(Math.random()*12+8)+'s;animation-delay:'+(Math.random()*8)+'s';
+    document.body.appendChild(p);
+  }
+})();
+</script>
+</body>
+</html>
