@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIKU — Red Mist Rising</title>
+    <meta name="description" content="Official website for the new action/supernatural manga series, RIKU. Every night the world tears open. Every night, she stitches it back together.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ------------------- */
+        /* --- RESET & GLOBALS --- */
+        /* ------------------- */
+        :root {
+            --dark-bg: #080810;
+            --crimson: #e63946;
+            --violet: #7c3aed;
+            --text-light: rgba(255, 255, 255, 0.8);
+            --text-heading: #ffffff;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.75" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.1"/></svg>');
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.15;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .reveal-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ------------------- */
+        /* --- LOADER --- */
+        /* ------------------- */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease-out;
+        }
+
+        #loader h1 {
+            font-size: clamp(3rem, 15vw, 8rem);
+            font-weight: 900;
+            color: var(--text-heading);
+            letter-spacing: 0.1em;
+            opacity: 0;
+            filter: blur(20px);
+            animation: blur-in 1.5s 0.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+        
+        #loader .rift-loader {
+            position: absolute;
+            width: 60%;
+            max-width: 500px;
+            opacity: 0;
+            animation: glow-in 2s 0.5s ease-in-out forwards;
+        }
+
+        #loader .rift-loader path {
+            stroke: var(--crimson);
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw-rift 1.5s 0.6s ease-out forwards;
+        }
+
+        @keyframes blur-in {
+            to {
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+        @keyframes glow-in {
+            0% { opacity: 0; filter: drop-shadow(0 0 2px var(--crimson)); }
+            50% { opacity: 1; filter: drop-shadow(0 0 15px var(--crimson)); }
+            100% { opacity: 1; filter: drop-shadow(0 0 5px var(--crimson)); }
+        }
+        @keyframes draw-rift {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* ------------------- */
+        /* --- HEADER --- */
+        /* ------------------- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            z-index: 100;
+            transition: background-color 0.3s ease-in-out;
+        }
+        
+        header.scrolled {
+            background-color: rgba(8, 8, 16, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        header .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-heading);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 700;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--text-heading);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--crimson);
+            bottom: -5px;
+            left: 0;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease-out;
+        }
+
+        nav a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        @media (max-width: 768px) {
+            nav { display: none; }
+        }
+
+        /* ------------------- */
+        /* --- HERO --- */
+        /* ------------------- */
+        #hero {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            color: var(--text-heading);
+        }
+
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .hero-rift {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120%;
+            max-width: 1600px;
+            z-index: 3;
+            opacity: 0;
+            animation: hero-rift-fade-in 2s 2.5s forwards;
+        }
+
+        .hero-rift path {
+            stroke: var(--crimson);
+            stroke-width: 2;
+            fill: none;
+            filter: drop-shadow(0 0 10px var(--crimson));
+            animation: pulse 4s infinite ease-in-out;
+        }
+
+        @keyframes hero-rift-fade-in {
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { filter: drop-shadow(0 0 5px var(--crimson)); }
+            50% { filter: drop-shadow(0 0 20px var(--crimson)); }
+            100% { filter: drop-shadow(0 0 5px var(--crimson)); }
+        }
+
+        #hero h1 {
+            font-size: clamp(4rem, 20vw, 12rem);
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            line-height: 1;
+            margin: 0;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--text-heading);
+            text-stroke: 2px var(--text-heading);
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.1"/></svg>');
+            background-clip: text;
+            -webkit-background-clip: text;
+            animation: title-flicker 10s infinite linear;
+        }
+
+        @keyframes title-flicker {
+            0% { background-position: 0 0; }
+            100% { background-position: 400px 400px; }
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            margin-top: 1rem;
+            max-width: 500px;
+            color: var(--text-light);
+            text-shadow: 0 0 10px var(--dark-bg);
+        }
+
+        .cta-buttons {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border: 2px solid transparent;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--crimson);
+            color: var(--text-heading);
+            border-color: var(--crimson);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--crimson);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-light);
+            border-color: var(--text-light);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--text-light);
+            color: var(--dark-bg);
+        }
+
+        /* ------------------- */
+        /* --- STORY --- */
+        /* ------------------- */
+        #story .container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .story-quote h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--text-heading);
+        }
+
+        .story-quote h2 span {
+            color: var(--crimson);
+        }
+
+        .story-description p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .story-description p:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            #story .container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .story-quote h2 {
+                text-align: center;
+            }
+        }
+
+        /* ------------------- */
+        /* --- PREVIEW --- */
+        /* ------------------- */
+        #preview {
+            padding-bottom: 120px;
+        }
+        
+        #preview h2 {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 3rem;
+            color: var(--text-heading);
+            letter-spacing: 2px;
+        }
+
+        .preview-strip {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .preview-strip::-webkit-scrollbar {
+            display: none; /* Safari and Chrome */
+        }
+
+        .preview-strip img {
+            height: 400px;
+            width: auto;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .preview-strip img:hover {
+            transform: scale(1.05);
+            filter: brightness(1.2);
+            border-color: var(--crimson);
+        }
+        
+        /* ------------------- */
+        /* --- CHARACTERS --- */
+        /* ------------------- */
+        #characters h2 {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 5rem;
+            color: var(--text-heading);
+            letter-spacing: 2px;
+        }
+
+        .character-row {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-bottom: 6rem;
+            padding: 2rem 0;
+        }
+
+        .character-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .character-number {
+            position: absolute;
+            left: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            z-index: -1;
+            user-select: none;
+        }
+
+        .character-info {
+            padding-left: 5rem;
+        }
+        
+        .character-row:nth-child(odd) .character-info {
+            border-left: 3px solid var(--crimson);
+        }
+        .character-row:nth-child(even) .character-info {
+            border-left: 3px solid var(--violet);
+        }
+
+        .character-info h3 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--text-heading);
+            margin-bottom: 0.5rem;
+        }
+        
+        .character-info p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            max-width: 600px;
+        }
+
+        @media (max-width: 768px) {
+            .character-number {
+                font-size: 8rem;
+                left: -20px;
+            }
+            .character-info {
+                padding-left: 2rem;
+            }
+            .character-info h3 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* ------------------- */
+        /* --- SUBSCRIBE --- */
+        /* ------------------- */
+        #subscribe {
+            background: linear-gradient(rgba(8, 8, 16, 0), var(--dark-bg)), 
+                        linear-gradient(to top, rgba(8, 8, 16, 0), var(--dark-bg));
+        }
+
+        #subscribe .container {
+            text-align: center;
+        }
+
+        #subscribe h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--text-heading);
+            margin-bottom: 1rem;
+        }
+
+        #subscribe p {
+            margin-bottom: 2.5rem;
+            color: var(--text-light);
+        }
+
+        .subscribe-form {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .subscribe-form input {
+            width: 100%;
+            padding: 1rem 3.5rem 1rem 1rem;
+            background: transparent;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-heading);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .subscribe-form input:focus {
+            outline: none;
+            border-color: var(--violet);
+        }
+
+        .subscribe-form button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--violet);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .subscribe-form button:hover {
+            background: #905cf7;
+        }
+
+        .subscribe-form button svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--text-heading);
+        }
+        
+        #subscribe-success {
+            display: none;
+            font-size: 1.2rem;
+            color: var(--violet);
+            font-weight: bold;
+        }
+
+        /* ------------------- */
+        /* --- FOOTER --- */
+        /* ------------------- */
+        footer {
+            padding: 2rem 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ------------------- */
+        /* --- LIGHTBOX --- */
+        /* ------------------- */
+        #lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        #lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        #lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border: 3px solid var(--border-color);
+        }
+
+        .lightbox-btn {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .lightbox-btn svg {
+            width: 24px;
+            height: 24px;
+            stroke: white;
+            stroke-width: 2;
+        }
+
+        #lightbox-close {
+            top: 20px;
+            right: 20px;
+        }
+
+        #lightbox-prev {
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #lightbox-next {
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOADER -->
+    <div id="loader">
+        <svg class="rift-loader" viewBox="0 0 400 50">
+            <path d="M0 25 Q 50 10, 100 25 T 200 25 T 300 25 T 400 25"/>
+        </svg>
+        <h1>RIKU</h1>
+    </div>
+
+    <!-- HEADER -->
+    <header id="main-header">
+        <div class="nav-container">
+            <a href="#" class="logo">RIKU</a>
+            <nav>
+                <a href="#story">Story</a>
+                <a href="#characters">Characters</a>
+                <a href="https://jarvis-vobiuslabs.github.io/riku-comic-studio/read/" target="_blank">Read Now</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section id="hero">
+        <canvas id="particle-canvas"></canvas>
+        <svg class="hero-rift" viewBox="0 0 1440 100">
+            <path d="M-50 50 Q 180 -20, 360 50 T 720 50 T 1080 50 T 1490 50" />
+        </svg>
+        <div class="hero-content">
+            <h1>RIKU</h1>
+            <p class="tagline">Every night the world tears open. Every night, she stitches it back together.</p>
+            <div class="cta-buttons">
+                <a href="https://jarvis-vobiuslabs.github.io/riku-comic-studio/read/" target="_blank" class="btn btn-primary">Read Chapter 1</a>
+                <a href="#story" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- STORY -->
+        <section id="story" class="reveal-section">
+            <div class="container">
+                <div class="story-quote">
+                    <h2>The first rift took her mother. Now she hunts them all. <span>Alone.</span></h2>
+                </div>
+                <div class="story-description">
+                    <p>Every night at 2 AM, the sky above Tokyo cracks open. From these dimensional rifts, monstrous creatures known as Hollows spill into our world, drawn by an insatiable hunger for life.</p>
+                    <p>Riku, a 17-year-old high schooler, stands as the city's lone, secret defender. After accidentally opening the first rift and losing her mother to its depths, she has dedicated her life to closing them. But her solitary war is about to change. A secret organization, SHINKEN, is closing in, and a mysterious rival who moves like smoke is challenging her at every turn. Deep within the largest, permanent Rift, an ancient evil stirs—and it already knows her name.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PREVIEW -->
+        <section id="preview" class="reveal-section">
+            <div class="container">
+                <h2>FIRST LOOK: CHAPTER 1</h2>
+                <div class="preview-strip">
+                    <img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_01.jpg" alt="Manga page 1 preview">
+                    <img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_02.jpg" alt="Manga page 2 preview">
+                    <img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_03.jpg" alt="Manga page 3 preview">
+                    <img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_04.jpg" alt="Manga page 4 preview">
+                </div>
+            </div>
+        </section>
+
+        <!-- CHARACTERS -->
+        <section id="characters" class="reveal-section">
+            <div class="container">
+                <h2>CHARACTERS</h2>
+                <div class="character-row">
+                    <span class="character-number">01</span>
+                    <div class="character-info">
+                        <h3>RIKU — The Hunter</h3>
+                        <p>17 years old, with crimson hair and piercing golden eyes. For three months, she's fought alone. Her katana, "Akagiri," absorbs the energy of defeated Hollows, and recently, it has begun to glow with an ominous light.</p>
+                    </div>
+                </div>
+                <div class="character-row">
+                    <span class="character-number">02</span>
+                    <div class="character-info">
+                        <h3>KAI — The Rival</h3>
+                        <p>Of unknown origin, Kai moves through Tokyo's shadows like smoke. He is the first person to ever match Riku's speed and skill in combat, his motives as mysterious as his past. Is he friend or foe?</p>
+                    </div>
+                </div>
+                <div class="character-row">
+                    <span class="character-number">03</span>
+                    <div class="character-info">
+                        <h3>THE HOLLOW KING</h3>
+                        <p>An ancient and powerful threat that emerged from the permanent Rift. Its presence warps reality, and its knowledge is terrifyingly intimate—it knows Riku's name and has made a chilling mention of her long-lost mother.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUBSCRIBE -->
+        <section id="subscribe" class="reveal-section">
+            <div class="container">
+                <h2>NEVER MISS A CHAPTER</h2>
+                <p>Get notified when new chapters are released.</p>
+                <div id="subscribe-success">Thank you! You're on the list.</div>
+                <form class="subscribe-form" id="subscribe-form">
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                    <button type="submit" aria-label="Subscribe">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 RIKU PROJECT. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox">
+        <button id="lightbox-close" class="lightbox-btn" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <button id="lightbox-prev" class="lightbox-btn" aria-label="Previous image">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg>
+        </button>
+        <button id="lightbox-next" class="lightbox-btn" aria-label="Next image">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
+        </button>
+        <img id="lightbox-img" src="" alt="Enlarged manga page">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- LOADER ---
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                loader.addEventListener('transitionend', () => {
+                    loader.style.display = 'none';
+                });
+            }, 2500);
+
+            // --- IOS-SAFE HERO HEIGHT ---
+            const hero = document.getElementById('hero');
+            const setHeroHeight = () => {
+                hero.style.height = `${window.innerHeight}px`;
+            };
+            setHeroHeight();
+            window.addEventListener('resize', setHeroHeight);
+
+            // --- HEADER SCROLL EFFECT ---
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // --- PARTICLE CANVAS ---
+            const canvas = document.getElementById('particle-canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            const particleColors = ['#e63946', '#7c3aed', 'rgba(255,255,255,0.6)'];
+
+            const setCanvasSize = () => {
+                canvas.width = hero.offsetWidth;
+                canvas.height = hero.offsetHeight;
+            };
+
+            class Particle {
+                constructor(x, y, radius, color, speed) {
+                    this.x = x;
+                    this.y = y;
+                    this.radius = radius;
+                    this.color = color;
+                    this.speed = speed;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                }
+
+                update() {
+                    this.y -= this.speed;
+                    if (this.y < -this.radius) {
+                        this.y = canvas.height + this.radius;
+                        this.x = Math.random() * canvas.width;
+                        this.speed = Math.random() * 0.5 + 0.1;
+                        this.radius = Math.random() * 1.5 + 0.5;
+                    }
+                    this.draw();
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                const numberOfParticles = Math.floor((canvas.width * canvas.height) / 20000);
+                for (let i = 0; i < numberOfParticles; i++) {
+                    const radius = Math.random() * 1.5 + 0.5;
+                    const x = Math.random() * canvas.width;
+                    const y = Math.random() * canvas.height;
+                    const color = particleColors[Math.floor(Math.random() * particleColors.length)];
+                    const speed = Math.random() * 0.5 + 0.1;
+                    particles.push(new Particle(x, y, radius, color, speed));
+                }
+            }
+
+            function animateParticles() {
+                requestAnimationFrame(animateParticles);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => p.update());
+            }
+
+            setCanvasSize();
+            initParticles();
+            animateParticles();
+            window.addEventListener('resize', () => {
+                setCanvasSize();
+                initParticles();
+            });
+
+            // --- SCROLL REVEAL ---
+            const revealSections = document.querySelectorAll('.reveal-section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            revealSections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- LIGHTBOX ---
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const previewImages = document.querySelectorAll('.preview-strip img');
+            const closeBtn = document.getElementById('lightbox-close');
+            const prevBtn = document.getElementById('lightbox-prev');
+            const nextBtn = document.getElementById('lightbox-next');
+            let currentIndex = 0;
+
+            const updateImage = (index) => {
+                const img = previewImages[index];
+                lightboxImg.src = img.src;
+                currentIndex = index;
+            };
+
+            const openLightbox = (index) => {
+                updateImage(index);
+                lightbox.classList.add('active');
+                document.body.classList.add('no-scroll');
+                document.addEventListener('keydown', handleKeyPress);
+            };
+
+            const closeLightbox = () => {
+                lightbox.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+                document.removeEventListener('keydown', handleKeyPress);
+            };
+
+            const showPrev = () => {
+                const newIndex = (currentIndex - 1 + previewImages.length) % previewImages.length;
+                updateImage(newIndex);
+            };
+
+            const showNext = () => {
+                const newIndex = (currentIndex + 1) % previewImages.length;
+                updateImage(newIndex);
+            };
+
+            const handleKeyPress = (e) => {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') showPrev();
+                if (e.key === 'ArrowRight') showNext();
+            };
+
+            previewImages.forEach((img, index) => {
+                img.addEventListener('click', () => openLightbox(index));
+            });
+
+            closeBtn.addEventListener('click', closeLightbox);
+            prevBtn.addEventListener('click', showPrev);
+            nextBtn.addEventListener('click', showNext);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            // --- EMAIL SUBSCRIBE FORM ---
+            const subscribeForm = document.getElementById('subscribe-form');
+            const successMessage = document.getElementById('subscribe-success');
+
+            subscribeForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const emailInput = subscribeForm.querySelector('input[type="email"]');
+                if (emailInput.value && emailInput.checkValidity()) {
+                    subscribeForm.style.display = 'none';
+                    successMessage.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
