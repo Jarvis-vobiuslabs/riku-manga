@@ -4,938 +4,780 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>RIKU — Red Mist Rising | Official Manga Series</title>
-    <meta name="description" content="Book 1 complete. Book 2 coming April 15. The most anticipated new manga series — 16,452 fans and counting.">
+    <meta name="description" content="Book 1 complete. Book 2 dropping April 15. Over 16,000 readers. New chapters every 2 weeks.">
     <meta name="theme-color" content="#080810">
     <meta property="og:title" content="RIKU — Red Mist Rising">
-    <meta property="og:description" content="Book 1 complete. Book 2 coming April 15.">
+    <meta property="og:description" content="Book 1 complete. Book 2 — Red Blood Moon — drops April 15.">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080810;--c:#e63946;--v:#7c3aed;--text:rgba(255,255,255,.68);--border:rgba(255,255,255,.07)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+body.locked{overflow:hidden}
+body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;mix-blend-mode:overlay}
+img{max-width:100%;display:block}
+.wrap{max-width:1200px;margin:0 auto;padding:0 1.5rem}
 
-    <style>
-        :root {
-            --bg: #080810;
-            --crimson: #e63946;
-            --violet: #7c3aed;
-            --text: rgba(255,255,255,0.75);
-            --border: rgba(255,255,255,0.08);
-        }
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-        }
-        body.no-scroll { overflow: hidden; }
-        /* Grain — fixed pseudo, never scrolling */
-        body::after {
-            content: '';
-            position: fixed; inset: 0;
-            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
-            pointer-events: none; z-index: 9999; mix-blend-mode: overlay;
-        }
-        img { max-width: 100%; display: block; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+/* ── REVEAL ── */
+.r{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.r.on{opacity:1;transform:none}
+.r.d1{transition-delay:.06s}.r.d2{transition-delay:.12s}.r.d3{transition-delay:.18s}.r.d4{transition-delay:.24s}.r.d5{transition-delay:.3s}
 
-        /* Scroll reveal */
-        .rev { opacity: 0; transform: translateY(32px); transition: opacity 0.85s cubic-bezier(.16,1,.3,1), transform 0.85s cubic-bezier(.16,1,.3,1); }
-        .rev.on { opacity: 1; transform: translateY(0); }
-        .rev.d1 { transition-delay: .08s; }
-        .rev.d2 { transition-delay: .16s; }
-        .rev.d3 { transition-delay: .24s; }
-        .rev.d4 { transition-delay: .32s; }
+/* ── LOADER ── */
+#loader{position:fixed;inset:0;background:var(--bg);z-index:10000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .6s ease-out}
+.ldr-rift{width:clamp(120px,22vw,260px);margin-bottom:2rem;opacity:0;animation:glowIn 1.8s .3s ease forwards}
+.ldr-rift path{stroke:var(--c);stroke-width:2;fill:none;stroke-dasharray:800;stroke-dashoffset:800;animation:drawLine 1.4s .4s ease-out forwards}
+#loader h1{font-size:clamp(4rem,16vw,10rem);font-weight:900;letter-spacing:.1em;color:#fff;opacity:0;filter:blur(18px);animation:blurIn 1.4s .2s cubic-bezier(.16,1,.3,1) forwards;line-height:1}
+#loader h1 span{color:var(--c)}
+#loader p{font-size:.65rem;font-weight:700;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-top:.8rem;opacity:0;animation:fup .7s 1.1s both}
+@keyframes blurIn{to{opacity:1;filter:blur(0)}}
+@keyframes glowIn{0%{opacity:0}50%{opacity:1;filter:drop-shadow(0 0 14px var(--c))}100%{opacity:1}}
+@keyframes drawLine{to{stroke-dashoffset:0}}
+@keyframes fup{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-        /* ══ LOADER ══ */
-        #loader {
-            position: fixed; inset: 0;
-            background: var(--bg); z-index: 10000;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: opacity .5s ease-out;
-        }
-        #loader .rift-svg { width: clamp(140px,25vw,280px); margin-bottom: 2rem; opacity: 0; animation: glowIn 2s .4s ease forwards; }
-        #loader .rift-svg path { stroke: var(--crimson); stroke-width: 2; fill: none; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: drawRift 1.5s .5s ease-out forwards; }
-        #loader h1 { font-size: clamp(3.5rem,14vw,9rem); font-weight: 900; color: #fff; letter-spacing: .1em; opacity: 0; filter: blur(20px); animation: blurIn 1.4s .2s cubic-bezier(.16,1,.3,1) forwards; }
-        #loader p { margin-top: .75rem; font-size: .7rem; font-weight: 700; letter-spacing: .4em; text-transform: uppercase; color: rgba(255,255,255,.25); opacity: 0; animation: fadeUp .8s 1s both; }
-        @keyframes blurIn { to { opacity:1; filter:blur(0); } }
-        @keyframes glowIn { 0%{opacity:0;} 50%{opacity:1;filter:drop-shadow(0 0 12px var(--crimson));} 100%{opacity:1;} }
-        @keyframes drawRift { to { stroke-dashoffset: 0; } }
-        @keyframes fadeUp { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
+/* ── COUNTDOWN BANNER ── */
+#top-bar{background:linear-gradient(90deg,rgba(124,58,237,.15),rgba(230,57,70,.15));border-bottom:1px solid rgba(230,57,70,.2);padding:.8rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;position:relative;z-index:90}
+.bar-badge{font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;background:var(--c);color:#fff;padding:.2rem .6rem;border-radius:4px;flex-shrink:0}
+.bar-msg{font-size:.82rem;font-weight:600;color:rgba(255,255,255,.75);white-space:nowrap}
+.cd{display:flex;align-items:center;gap:.4rem}
+.cd-unit{display:flex;flex-direction:column;align-items:center;min-width:36px}
+.cd-n{font-size:1rem;font-weight:800;color:#fff;line-height:1;font-variant-numeric:tabular-nums;transition:transform .15s}
+.cd-n.tick{transform:translateY(-2px)}
+.cd-lbl{font-size:.5rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-top:.15rem}
+.cd-sep{font-size:.9rem;font-weight:700;color:var(--c);margin-bottom:.5rem}
 
-        /* ══ COUNTDOWN BANNER ══ */
-        #countdown-banner {
-            position: relative; z-index: 90;
-            background: linear-gradient(90deg, rgba(124,58,237,.18), rgba(230,57,70,.18));
-            border-bottom: 1px solid rgba(230,57,70,.25);
-            padding: .75rem 1.5rem;
-            text-align: center;
-            display: flex; align-items: center; justify-content: center; gap: .75rem; flex-wrap: wrap;
-        }
-        #countdown-banner .badge {
-            font-size: .65rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase;
-            background: var(--crimson); color: #fff; padding: .2rem .55rem; border-radius: 4px;
-        }
-        #countdown-banner .msg { font-size: .85rem; font-weight: 600; color: rgba(255,255,255,.85); }
-        #countdown-banner .timer { display: flex; gap: .5rem; }
-        .cd-unit { display: flex; flex-direction: column; align-items: center; }
-        .cd-num { font-size: clamp(.9rem,2.5vw,1.1rem); font-weight: 800; color: #fff; line-height: 1; font-variant-numeric: tabular-nums; }
-        .cd-label { font-size: .55rem; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.35); margin-top: .15rem; }
-        .cd-sep { font-size: 1rem; font-weight: 700; color: var(--crimson); align-self: flex-start; margin-top: .05rem; }
+/* ── HEADER ── */
+header{position:fixed;top:0;left:0;width:100%;padding:1rem 1.5rem;z-index:100;transition:background .3s,backdrop-filter .3s,box-shadow .3s}
+header.s{background:rgba(8,8,16,.9);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--border)}
+.nav{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:1.3rem;font-weight:900;color:#fff;text-decoration:none;letter-spacing:2px}
+.logo em{color:var(--c);font-style:normal}
+.nav-links{display:flex;align-items:center;gap:1.75rem}
+.nav-links a{font-size:.82rem;font-weight:600;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.sub-cta{display:inline-flex;align-items:center;gap:.35rem;background:var(--c);color:#fff;font-size:.8rem;font-weight:700;padding:.5rem 1.1rem;border-radius:8px;text-decoration:none;transition:filter .2s,transform .15s;box-shadow:0 2px 16px rgba(230,57,70,.3)}
+.sub-cta:hover{filter:brightness(1.1)}
+.sub-cta:active{transform:scale(.97)}
+@media(max-width:680px){.nav-links a:not(:last-child){display:none}}
 
-        /* ══ HEADER ══ */
-        header {
-            position: fixed; top: 0; left: 0; width: 100%;
-            padding: 1.1rem 1.5rem; z-index: 100;
-            transition: background .3s, box-shadow .3s;
-        }
-        header.scrolled { background: rgba(8,8,16,.88); backdrop-filter: blur(12px); box-shadow: 0 1px 0 var(--border); }
-        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.4rem; font-weight: 900; color: #fff; text-decoration: none; letter-spacing: 2px; }
-        .logo span { color: var(--crimson); }
-        nav { display: flex; align-items: center; gap: 2rem; }
-        nav a { color: rgba(255,255,255,.6); text-decoration: none; font-size: .85rem; font-weight: 600; transition: color .2s; }
-        nav a:hover { color: #fff; }
-        .nav-sub-btn {
-            display: inline-flex; align-items: center; gap: .4rem;
-            background: var(--crimson); color: #fff; border: none; cursor: pointer;
-            font-size: .8rem; font-weight: 700; padding: .5rem 1.1rem; border-radius: 8px;
-            text-decoration: none; transition: filter .2s, transform .15s;
-        }
-        .nav-sub-btn:hover { filter: brightness(1.1); }
-        .nav-sub-btn:active { transform: scale(.97); }
-        @media (max-width: 768px) { nav .nav-links { display: none; } }
+/* ── HERO ── */
+#hero{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+#pc{position:absolute;inset:0;z-index:1}
+.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 48%,rgba(124,58,237,.09) 0%,transparent 65%);pointer-events:none;z-index:2}
+.hero-rift{position:absolute;top:0;left:50%;transform:translateX(-50%);width:140%;z-index:3;opacity:0;animation:fIn 1s 2.8s forwards}
+.hero-rift path{stroke:var(--c);stroke-width:1.5;fill:none;filter:drop-shadow(0 0 6px var(--c));animation:rPulse 4s 3s infinite ease-in-out}
+@keyframes fIn{to{opacity:1}}
+@keyframes rPulse{0%,100%{filter:drop-shadow(0 0 5px var(--c))}50%{filter:drop-shadow(0 0 22px var(--c))}}
+.hc{position:relative;z-index:4;padding:0 1.5rem;display:flex;flex-direction:column;align-items:center}
+.h-eye{font-size:.65rem;font-weight:800;letter-spacing:.4em;text-transform:uppercase;color:var(--c);margin-bottom:1.5rem;opacity:0;animation:fup .7s .7s both}
+#hero h1{font-size:clamp(5rem,21vw,14rem);font-weight:900;line-height:1;letter-spacing:.05em;color:#f4f4f4;text-shadow:0 0 80px rgba(230,57,70,.18);opacity:0;filter:blur(16px);animation:blurIn 1.5s .3s cubic-bezier(.16,1,.3,1) forwards}
+#hero h1 em{color:var(--c);font-style:normal}
+.h-div{display:flex;align-items:center;gap:.9rem;margin:1.5rem 0;width:100%;justify-content:center}
+.h-div .line{flex:1;max-width:80px;height:1px}
+.h-div .dot{width:5px;height:5px;border-radius:50%;background:var(--c);box-shadow:0 0 10px var(--c)}
+.h-tag{font-size:clamp(.88rem,1.9vw,1.1rem);font-weight:300;color:rgba(255,255,255,.48);max-width:420px;line-height:1.65;margin-bottom:1.25rem;opacity:0;animation:fup .9s 1s both}
+.h-proof{display:flex;align-items:center;gap:1.25rem;margin-bottom:2.5rem;flex-wrap:wrap;justify-content:center;opacity:0;animation:fup .8s 1.2s both}
+.h-stat{font-size:.85rem;font-weight:700;color:rgba(255,255,255,.55)}
+.h-stat strong{color:#fff}
+.h-sep{width:1px;height:12px;background:rgba(255,255,255,.15)}
+.done-badge{display:inline-flex;align-items:center;gap:.35rem;font-size:.67rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.28);color:#10b981;padding:.28rem .7rem;border-radius:20px}
+.done-badge .dot{width:5px;height:5px;border-radius:50%;background:#10b981;box-shadow:0 0 6px #10b981}
+.h-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;opacity:0;animation:fup .8s 1.35s both}
+.btn-p{display:inline-flex;align-items:center;gap:.5rem;background:var(--c);color:#fff;font-weight:700;font-size:.95rem;padding:.9rem 2.2rem;border-radius:12px;text-decoration:none;box-shadow:0 6px 36px rgba(230,57,70,.45);transition:filter .2s,transform .15s}
+.btn-p:hover{filter:brightness(1.1)}
+.btn-p:active{transform:scale(.97)}
+.btn-s{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.11);color:rgba(255,255,255,.65);font-weight:700;font-size:.95rem;padding:.9rem 2.2rem;border-radius:12px;text-decoration:none;backdrop-filter:blur(12px);transition:border-color .2s,color .2s,transform .15s}
+.btn-s:hover{border-color:rgba(255,255,255,.28);color:#fff}
+.btn-s:active{transform:scale(.97)}
+.scroll-cue{position:absolute;bottom:2rem;z-index:4;color:rgba(255,255,255,.2);animation:bob 2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
 
-        /* ══ HERO ══ */
-        #hero { position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
-        #particle-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
-        .hero-rift { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 130%; z-index: 3; opacity: 0; animation: fadeIn 1s 2.8s forwards; }
-        .hero-rift path { stroke: var(--crimson); stroke-width: 1.5; fill: none; filter: drop-shadow(0 0 8px var(--crimson)); animation: riftPulse 4s infinite ease-in-out; }
-        @keyframes fadeIn { to { opacity: 1; } }
-        @keyframes riftPulse { 0%,100%{filter:drop-shadow(0 0 5px var(--crimson));} 50%{filter:drop-shadow(0 0 22px var(--crimson));} }
-        /* Radial glow — absolute not fixed */
-        .hero-glow { position: absolute; inset: 0; background: radial-gradient(ellipse 65% 55% at 50% 50%, rgba(124,58,237,.08) 0%, transparent 65%); pointer-events: none; z-index: 2; }
-        .hero-content { position: relative; z-index: 4; display: flex; flex-direction: column; align-items: center; padding: 0 1.5rem; }
-        .hero-eyebrow { font-size: .7rem; font-weight: 800; letter-spacing: .4em; text-transform: uppercase; color: var(--crimson); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp .8s .6s both; }
-        #hero h1 { font-size: clamp(5rem,20vw,13rem); font-weight: 900; letter-spacing: .06em; line-height: 1; color: #f5f5f5; text-shadow: 0 0 100px rgba(230,57,70,.2); opacity: 0; animation: blurIn 1.4s .3s cubic-bezier(.16,1,.3,1) forwards; }
-        #hero h1 .k { color: var(--crimson); }
-        .hero-divider { display: flex; align-items: center; gap: 1rem; margin: 1.5rem 0; width: 100%; justify-content: center; }
-        .hero-divider .line { flex: 1; max-width: 90px; height: 1px; }
-        .hero-divider .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--crimson); box-shadow: 0 0 10px var(--crimson); }
-        .hero-tagline { font-size: clamp(.95rem,2vw,1.2rem); font-weight: 300; color: rgba(255,255,255,.5); max-width: 440px; line-height: 1.65; margin-bottom: 1rem; opacity: 0; animation: fadeUp .9s 1s both; }
-        /* Social proof under tagline */
-        .hero-stats { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2.5rem; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fadeUp .8s 1.15s both; }
-        .hero-stat { display: flex; align-items: center; gap: .4rem; }
-        .hero-stat .val { font-size: .9rem; font-weight: 800; color: #fff; }
-        .hero-stat .lbl { font-size: .75rem; color: rgba(255,255,255,.4); }
-        .stat-sep { width: 1px; height: 14px; background: rgba(255,255,255,.15); }
-        .book1-badge { display: inline-flex; align-items: center; gap: .4rem; font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; background: rgba(16,185,129,.12); border: 1px solid rgba(16,185,129,.3); color: #10b981; padding: .3rem .75rem; border-radius: 20px; }
-        .book1-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #10b981; box-shadow: 0 0 6px #10b981; }
-        .hero-btns { display: flex; flex-direction: column; gap: 1rem; align-items: center; opacity: 0; animation: fadeUp .8s 1.3s both; }
-        @media (min-width: 480px) { .hero-btns { flex-direction: row; } }
-        .btn-primary {
-            display: inline-flex; align-items: center; gap: .5rem;
-            background: var(--crimson); color: #fff; font-weight: 700; font-size: .95rem;
-            padding: .9rem 2.2rem; border-radius: 12px; text-decoration: none;
-            box-shadow: 0 6px 36px rgba(230,57,70,.45);
-            transition: filter .2s, transform .15s;
-        }
-        .btn-primary:hover { filter: brightness(1.1); }
-        .btn-primary:active { transform: scale(.97); }
-        .btn-secondary {
-            display: inline-flex; align-items: center; gap: .5rem;
-            background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12);
-            color: rgba(255,255,255,.7); font-weight: 700; font-size: .95rem;
-            padding: .9rem 2.2rem; border-radius: 12px; text-decoration: none;
-            backdrop-filter: blur(12px);
-            transition: border-color .2s, color .2s, transform .15s;
-        }
-        .btn-secondary:hover { border-color: rgba(255,255,255,.3); color: #fff; }
-        .btn-secondary:active { transform: scale(.97); }
-        .scroll-hint { position: absolute; bottom: 2rem; z-index: 4; color: rgba(255,255,255,.2); animation: bounce 2s ease-in-out infinite; }
-        @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(8px);} }
+/* ── RIFT DIVIDER ── */
+.rift-div{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(124,58,237,.4),rgba(230,57,70,.5),rgba(124,58,237,.4),transparent)}
 
-        /* ══ RELEASE BANNER — Book 1 complete ══ */
-        .release-bar {
-            background: rgba(16,185,129,.07);
-            border-top: 1px solid rgba(16,185,129,.15);
-            border-bottom: 1px solid rgba(16,185,129,.15);
-            padding: 1.2rem 1.5rem;
-        }
-        .release-bar .inner { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
-        .release-bar .left { display: flex; align-items: center; gap: 1rem; }
-        .release-bar .check { width: 36px; height: 36px; border-radius: 50%; background: rgba(16,185,129,.2); border: 1.5px solid rgba(16,185,129,.5); display: flex; align-items: center; justify-content: center; color: #10b981; flex-shrink: 0; }
-        .release-bar .text strong { font-weight: 800; color: #fff; font-size: .95rem; display: block; }
-        .release-bar .text span { font-size: .78rem; color: rgba(255,255,255,.45); }
-        .release-bar .chapters { display: flex; gap: .35rem; flex-wrap: wrap; }
-        .ch-pill { font-size: .65rem; font-weight: 700; letter-spacing: .05em; padding: .2rem .6rem; border-radius: 20px; border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.5); }
-        .ch-pill.done { background: rgba(16,185,129,.15); border-color: rgba(16,185,129,.35); color: #10b981; }
-        .ch-pill.current { background: rgba(230,57,70,.15); border-color: rgba(230,57,70,.4); color: var(--crimson); }
+/* ── BOOK 1 BAR ── */
+.b1-bar{background:rgba(16,185,129,.06);border-top:1px solid rgba(16,185,129,.12);border-bottom:1px solid rgba(16,185,129,.12);padding:1.25rem 1.5rem}
+.b1-inner{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem}
+.b1-left{display:flex;align-items:center;gap:1rem}
+.b1-check{width:38px;height:38px;border-radius:50%;background:rgba(16,185,129,.18);border:1.5px solid rgba(16,185,129,.4);display:flex;align-items:center;justify-content:center;color:#10b981;flex-shrink:0}
+.b1-text strong{font-weight:800;color:#fff;font-size:.92rem;display:block}
+.b1-text span{font-size:.75rem;color:rgba(255,255,255,.38)}
+.ch-pills{display:flex;gap:.3rem;flex-wrap:wrap}
+.pill{font-size:.62rem;font-weight:700;padding:.22rem .55rem;border-radius:20px}
+.pill.done{background:rgba(16,185,129,.14);border:1px solid rgba(16,185,129,.32);color:#10b981}
+.pill.next{background:rgba(230,57,70,.12);border:1px solid rgba(230,57,70,.35);color:var(--c)}
 
-        /* ══ SOCIAL PROOF ══ */
-        .social-proof { padding: 5rem 0; border-bottom: 1px solid var(--border); }
-        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); }
-        @media (min-width: 640px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
-        .stat-box { background: var(--bg); padding: 2.5rem 1.5rem; text-align: center; }
-        .stat-box .number { font-size: clamp(2rem,5vw,3rem); font-weight: 900; color: #fff; line-height: 1; margin-bottom: .4rem; }
-        .stat-box .number span { color: var(--crimson); }
-        .stat-box .desc { font-size: .78rem; color: rgba(255,255,255,.4); text-transform: uppercase; letter-spacing: .1em; font-weight: 600; }
+/* ── SECTION LABELS ── */
+.sec-label{font-size:.65rem;font-weight:800;letter-spacing:.35em;text-transform:uppercase;color:var(--c);margin-bottom:1rem}
 
-        /* ══ SUBSCRIPTION TIERS ══ */
-        .subscription { padding: 6rem 0; border-bottom: 1px solid var(--border); }
-        .subscription h2 { font-size: clamp(1.6rem,4vw,2.8rem); font-weight: 900; color: #fff; text-align: center; margin-bottom: .75rem; letter-spacing: -.02em; }
-        .subscription .sub-note { text-align: center; color: rgba(255,255,255,.4); font-size: .9rem; margin-bottom: 3.5rem; }
-        .tiers { display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 860px; margin: 0 auto; }
-        @media (min-width: 640px) { .tiers { grid-template-columns: 1fr 1fr; } }
-        .tier { border-radius: 20px; padding: 2.5rem; border: 1px solid var(--border); position: relative; overflow: hidden; }
-        .tier.free { background: rgba(255,255,255,.03); }
-        .tier.paid { background: linear-gradient(145deg, rgba(124,58,237,.12), rgba(230,57,70,.08)); border-color: rgba(124,58,237,.35); }
-        .tier .popular-badge { position: absolute; top: 1.2rem; right: 1.2rem; font-size: .6rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; background: var(--violet); color: #fff; padding: .2rem .6rem; border-radius: 4px; }
-        .tier .price { margin: 1.25rem 0 1.5rem; }
-        .tier .price .amount { font-size: clamp(2.5rem,6vw,3.5rem); font-weight: 900; color: #fff; line-height: 1; }
-        .tier .price .per { font-size: .9rem; color: rgba(255,255,255,.4); margin-left: .25rem; }
-        .tier h3 { font-size: .75rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.5); }
-        .tier ul { list-style: none; space-y: .75rem; margin-bottom: 2rem; }
-        .tier ul li { display: flex; align-items: flex-start; gap: .6rem; font-size: .9rem; color: rgba(255,255,255,.6); padding: .5rem 0; border-bottom: 1px solid rgba(255,255,255,.05); }
-        .tier ul li:last-child { border-bottom: none; }
-        .tier ul li .icon { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
-        .tier ul li.has .icon { background: rgba(16,185,129,.2); color: #10b981; }
-        .tier ul li.no .icon { background: rgba(255,255,255,.06); color: rgba(255,255,255,.25); }
-        .tier ul li.no { color: rgba(255,255,255,.3); text-decoration: line-through; text-decoration-color: rgba(255,255,255,.15); }
-        .tier .tier-btn { display: block; text-align: center; padding: .95rem; border-radius: 12px; font-weight: 700; font-size: .9rem; text-decoration: none; transition: filter .2s, transform .15s; }
-        .tier.free .tier-btn { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.7); }
-        .tier.paid .tier-btn { background: var(--violet); color: #fff; box-shadow: 0 4px 24px rgba(124,58,237,.4); }
-        .tier .tier-btn:hover { filter: brightness(1.1); }
-        .tier .tier-btn:active { transform: scale(.97); }
+/* ── STORY ── */
+.story{padding:6rem 0;border-bottom:1px solid var(--border)}
+.story-grid{display:grid;grid-template-columns:1fr;gap:3.5rem}
+@media(min-width:768px){.story-grid{grid-template-columns:1fr 1fr;align-items:start}}
+.story-q h2{font-size:clamp(1.9rem,4.2vw,3.1rem);font-weight:900;color:#fff;line-height:1.12;letter-spacing:-.025em}
+.story-q h2 .dim{color:rgba(255,255,255,.25)}
+.story-body{display:flex;flex-direction:column;gap:1.1rem}
+.story-body p{font-size:clamp(.88rem,1.6vw,.98rem);line-height:1.9;color:rgba(255,255,255,.52)}
+.story-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.75rem}
+.stag{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .7rem;border-radius:8px;background:rgba(230,57,70,.07);border:1px solid rgba(230,57,70,.18);color:var(--c)}
 
-        /* ══ STORY ══ */
-        .story { padding: 6rem 0; border-bottom: 1px solid var(--border); }
-        .story-inner { display: grid; grid-template-columns: 1fr; gap: 3rem; }
-        @media (min-width: 768px) { .story-inner { grid-template-columns: 1fr 1fr; align-items: start; } }
-        .story-label { font-size: .7rem; font-weight: 800; letter-spacing: .3em; text-transform: uppercase; color: var(--crimson); margin-bottom: 1.25rem; }
-        .story-quote h2 { font-size: clamp(1.8rem,4vw,3rem); font-weight: 900; color: #fff; line-height: 1.15; letter-spacing: -.02em; }
-        .story-quote h2 .dim { color: rgba(255,255,255,.3); }
-        .story-body { display: flex; flex-direction: column; gap: 1.1rem; }
-        .story-body p { font-size: clamp(.9rem,1.7vw,1rem); line-height: 1.85; color: rgba(255,255,255,.55); }
-        .story-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
-        .tag { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .3rem .75rem; border-radius: 8px; background: rgba(230,57,70,.08); border: 1px solid rgba(230,57,70,.2); color: var(--crimson); }
+/* ── PREVIEW ── */
+.preview{padding:5rem 0;background:rgba(0,0,0,.3);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.prev-hdr{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
+.prev-hdr h2{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;color:#fff;letter-spacing:-.02em}
+.prev-link{font-size:.85rem;font-weight:700;color:var(--c);text-decoration:none;transition:opacity .2s}
+.prev-link:hover{opacity:.7}
+.strip{display:flex;gap:1rem;overflow-x:auto;padding-bottom:.5rem;-webkit-overflow-scrolling:touch}
+.strip::-webkit-scrollbar{display:none}
+.strip{scrollbar-width:none}
+.strip img{flex-shrink:0;width:clamp(165px,33vw,225px);aspect-ratio:2/3;object-fit:cover;border-radius:14px;cursor:pointer;border:1px solid rgba(255,255,255,.07);transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .25s}
+.strip img:hover{transform:translateY(-7px) scale(1.015);box-shadow:0 22px 54px rgba(230,57,70,.25);border-color:rgba(230,57,70,.3)}
+.strip-more{flex-shrink:0;width:clamp(165px,33vw,225px);aspect-ratio:2/3;border-radius:14px;border:1px dashed rgba(230,57,70,.3);background:rgba(230,57,70,.04);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;text-decoration:none;transition:background .2s,border-color .2s}
+.strip-more:hover{background:rgba(230,57,70,.08);border-color:rgba(230,57,70,.5)}
+.strip-more .arr{width:46px;height:46px;border-radius:50%;background:rgba(230,57,70,.14);display:flex;align-items:center;justify-content:center;color:var(--c);font-size:1.2rem;font-weight:700}
+.strip-more p{font-size:.78rem;font-weight:700;color:rgba(255,255,255,.32);text-align:center;line-height:1.5}
 
-        /* ══ RELEASE SCHEDULE ══ */
-        .schedule { padding: 5rem 0; border-bottom: 1px solid var(--border); background: rgba(124,58,237,.03); }
-        .schedule h2 { font-size: clamp(1.4rem,3.5vw,2.2rem); font-weight: 900; color: #fff; margin-bottom: 2.5rem; }
-        .schedule-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 1rem; }
-        .sched-card { border-radius: 16px; padding: 1.5rem; border: 1px solid var(--border); background: rgba(255,255,255,.025); }
-        .sched-card .ch-tag { font-size: .65rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; margin-bottom: .75rem; }
-        .sched-card.done .ch-tag { color: #10b981; }
-        .sched-card.next .ch-tag { color: var(--crimson); }
-        .sched-card.upcoming .ch-tag { color: rgba(255,255,255,.3); }
-        .sched-card h3 { font-size: 1rem; font-weight: 800; color: #fff; margin-bottom: .35rem; }
-        .sched-card .date { font-size: .78rem; color: rgba(255,255,255,.35); }
-        .sched-card.next { background: rgba(230,57,70,.07); border-color: rgba(230,57,70,.3); }
+/* ── STATS (animated) ── */
+.stats-sec{border-bottom:1px solid var(--border)}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border)}
+@media(min-width:600px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+.stat-box{background:var(--bg);padding:2.75rem 1.5rem;text-align:center}
+.stat-n{font-size:clamp(2.2rem,5.5vw,3.2rem);font-weight:900;color:#fff;line-height:1;margin-bottom:.5rem;font-variant-numeric:tabular-nums}
+.stat-n em{color:var(--c);font-style:normal}
+.stat-d{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.35)}
 
-        /* ══ CHAPTER PREVIEW ══ */
-        .preview { padding: 5rem 0; border-bottom: 1px solid var(--border); background: rgba(0,0,0,.3); }
-        .preview-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
-        .preview-header h2 { font-size: clamp(1.4rem,3.5vw,2.2rem); font-weight: 900; color: #fff; }
-        .preview-link { font-size: .85rem; font-weight: 700; color: var(--crimson); text-decoration: none; transition: opacity .2s; }
-        .preview-link:hover { opacity: .7; }
-        .preview-strip { display: flex; gap: 1rem; overflow-x: auto; padding-bottom: .5rem; }
-        .preview-strip::-webkit-scrollbar { display: none; }
-        .preview-strip { scrollbar-width: none; }
-        .preview-strip img {
-            flex-shrink: 0;
-            width: clamp(170px,35vw,230px);
-            aspect-ratio: 2/3;
-            object-fit: cover;
-            border-radius: 14px;
-            cursor: pointer;
-            border: 1px solid var(--border);
-            transition: transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s;
-        }
-        .preview-strip img:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 20px 50px rgba(230,57,70,.25); }
-        .preview-more {
-            flex-shrink: 0;
-            width: clamp(170px,35vw,230px); aspect-ratio: 2/3;
-            border-radius: 14px; border: 1px dashed rgba(230,57,70,.35);
-            background: rgba(230,57,70,.05);
-            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
-            text-decoration: none; cursor: pointer; transition: background .2s;
-        }
-        .preview-more:hover { background: rgba(230,57,70,.09); }
-        .preview-more .arrow-circle { width: 48px; height: 48px; border-radius: 50%; background: rgba(230,57,70,.15); display: flex; align-items: center; justify-content: center; color: var(--crimson); font-size: 1.3rem; font-weight: 700; }
-        .preview-more p { font-size: .8rem; font-weight: 700; color: rgba(255,255,255,.35); text-align: center; line-height: 1.4; }
+/* ── CHARACTERS ── */
+.chars{padding:6rem 0;border-bottom:1px solid var(--border)}
+.chars h2{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;color:#fff;margin-bottom:3.5rem;letter-spacing:-.02em}
+.char-row{display:flex;flex-direction:column;gap:1.5rem;padding:2.5rem 0;border-bottom:1px solid var(--border);cursor:default;transition:background .25s,padding .25s,margin .25s;border-radius:4px}
+@media(min-width:640px){.char-row{flex-direction:row;align-items:center;gap:2.5rem}}
+.char-row:last-child{border-bottom:none}
+.char-row:hover{background:rgba(255,255,255,.02);padding:2.5rem 1rem;margin:0 -1rem}
+.char-n{font-size:clamp(3.5rem,9vw,6rem);font-weight:900;line-height:1;flex-shrink:0;width:80px;text-align:center;font-variant-numeric:tabular-nums}
+.char-row:nth-child(1) .char-n{color:rgba(230,57,70,.13)}
+.char-row:nth-child(2) .char-n{color:rgba(59,130,246,.13)}
+.char-row:nth-child(3) .char-n{color:rgba(124,58,237,.13)}
+.char-id{flex-shrink:0;min-width:170px}
+.char-role{font-size:.62rem;font-weight:800;letter-spacing:.25em;text-transform:uppercase;margin-bottom:.55rem}
+.char-row:nth-child(1) .char-role{color:var(--c)}
+.char-row:nth-child(2) .char-role{color:#3b82f6}
+.char-row:nth-child(3) .char-role{color:var(--v)}
+.char-name{font-size:clamp(1.3rem,2.8vw,1.75rem);font-weight:900;color:#fff;letter-spacing:-.01em;line-height:1.1}
+.char-vr{width:1px;align-self:stretch;background:var(--border);display:none;flex-shrink:0}
+@media(min-width:640px){.char-vr{display:block}}
+.char-desc{font-size:.94rem;line-height:1.85;color:rgba(255,255,255,.48);max-width:500px}
 
-        /* ══ CHARACTERS ══ */
-        .characters { padding: 6rem 0; border-bottom: 1px solid var(--border); }
-        .characters h2 { font-size: clamp(1.4rem,3.5vw,2.2rem); font-weight: 900; color: #fff; margin-bottom: 3rem; }
-        .char-row {
-            display: flex; flex-direction: column; gap: 1.5rem;
-            padding: 2.5rem 0; border-bottom: 1px solid var(--border);
-            transition: background .3s;
-        }
-        @media (min-width: 640px) { .char-row { flex-direction: row; align-items: center; gap: 2.5rem; } }
-        .char-row:last-child { border-bottom: none; }
-        .char-row:hover { background: rgba(255,255,255,.015); margin: 0 -1.5rem; padding: 2.5rem 1.5rem; }
-        .char-num { font-size: clamp(3rem,8vw,5.5rem); font-weight: 900; line-height: 1; flex-shrink: 0; }
-        .char-row:nth-child(1) .char-num { color: rgba(230,57,70,.15); }
-        .char-row:nth-child(2) .char-num { color: rgba(59,130,246,.15); }
-        .char-row:nth-child(3) .char-num { color: rgba(124,58,237,.15); }
-        .char-identity { flex-shrink: 0; min-width: 180px; }
-        .char-role { font-size: .65rem; font-weight: 800; letter-spacing: .25em; text-transform: uppercase; margin-bottom: .5rem; }
-        .char-row:nth-child(1) .char-role { color: var(--crimson); }
-        .char-row:nth-child(2) .char-role { color: #3b82f6; }
-        .char-row:nth-child(3) .char-role { color: var(--violet); }
-        .char-name { font-size: clamp(1.3rem,3vw,1.8rem); font-weight: 900; color: #fff; letter-spacing: -.01em; line-height: 1.1; }
-        .char-divider { width: 1px; align-self: stretch; background: var(--border); display: none; }
-        @media (min-width: 640px) { .char-divider { display: block; } }
-        .char-desc { font-size: .95rem; line-height: 1.8; color: rgba(255,255,255,.5); max-width: 480px; }
+/* ── REVIEWS ── */
+.reviews{padding:5rem 0;background:rgba(124,58,237,.025);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.reviews h2{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;color:#fff;margin-bottom:3rem;letter-spacing:-.02em}
+.rev-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:640px){.rev-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:960px){.rev-grid{grid-template-columns:repeat(3,1fr)}}
+.rev-card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:18px;padding:1.75rem;display:flex;flex-direction:column;gap:1.25rem;transition:border-color .25s}
+.rev-card:hover{border-color:rgba(255,255,255,.14)}
+.rev-stars{display:flex;gap:3px}
+.star{width:13px;height:13px}
+.rev-q{font-size:.9rem;line-height:1.72;color:rgba(255,255,255,.58);font-style:italic;flex:1}
+.rev-author{display:flex;align-items:center;gap:.65rem;margin-top:auto}
+.rev-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:800;color:#fff;flex-shrink:0}
+.rev-name{font-size:.82rem;font-weight:700;color:rgba(255,255,255,.72);display:block}
+.rev-handle{font-size:.7rem;color:rgba(255,255,255,.3);margin-top:.1rem}
 
-        /* ══ REVIEWS ══ */
-        .reviews { padding: 5rem 0; border-bottom: 1px solid var(--border); background: rgba(124,58,237,.02); }
-        .reviews h2 { font-size: clamp(1.4rem,3.5vw,2.2rem); font-weight: 900; color: #fff; margin-bottom: 2.5rem; }
-        .review-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-        @media (min-width: 640px) { .review-grid { grid-template-columns: repeat(2,1fr); } }
-        @media (min-width: 1024px) { .review-grid { grid-template-columns: repeat(3,1fr); } }
-        .review-card { background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 16px; padding: 1.75rem; }
-        .review-stars { display: flex; gap: 3px; margin-bottom: 1rem; }
-        .star { width: 14px; height: 14px; }
-        .review-text { font-size: .9rem; line-height: 1.7; color: rgba(255,255,255,.6); margin-bottom: 1.25rem; font-style: italic; }
-        .review-author { display: flex; align-items: center; gap: .6rem; }
-        .review-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 800; color: #fff; flex-shrink: 0; }
-        .review-name { font-size: .82rem; font-weight: 700; color: rgba(255,255,255,.7); }
-        .review-handle { font-size: .72rem; color: rgba(255,255,255,.3); }
+/* ── SCHEDULE ── */
+.schedule{padding:5rem 0;border-bottom:1px solid var(--border)}
+.schedule h2{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:900;color:#fff;margin-bottom:3rem;letter-spacing:-.02em}
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-row{display:grid;grid-template-columns:110px 1fr;gap:0;align-items:stretch}
+@media(max-width:500px){.tl-row{grid-template-columns:80px 1fr}}
+.tl-left{display:flex;flex-direction:column;align-items:center;gap:0;padding-top:.35rem}
+.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:.25rem}
+.tl-dot.done{background:#10b981;box-shadow:0 0 8px rgba(16,185,129,.5)}
+.tl-dot.next{background:var(--c);box-shadow:0 0 10px rgba(230,57,70,.6);animation:nextPulse 2s ease-in-out infinite}
+.tl-dot.future{background:rgba(255,255,255,.15)}
+@keyframes nextPulse{0%,100%{box-shadow:0 0 6px rgba(230,57,70,.4)}50%{box-shadow:0 0 16px rgba(230,57,70,.8)}}
+.tl-line{width:1px;flex:1;margin-top:4px}
+.tl-line.done{background:rgba(16,185,129,.3)}
+.tl-line.future{background:rgba(255,255,255,.08)}
+.tl-right{padding:.25rem 0 2.25rem 0}
+.tl-date{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4rem}
+.tl-date.done{color:rgba(16,185,129,.7)}
+.tl-date.next{color:var(--c)}
+.tl-date.future{color:rgba(255,255,255,.3)}
+.tl-title{font-size:1rem;font-weight:800;color:#fff;margin-bottom:.3rem}
+.tl-title.future{color:rgba(255,255,255,.4)}
+.tl-sub{font-size:.78rem;color:rgba(255,255,255,.35)}
+.tl-badge{display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.18rem .5rem;border-radius:4px;margin-top:.5rem}
+.tl-badge.done{background:rgba(16,185,129,.12);color:#10b981;border:1px solid rgba(16,185,129,.25)}
+.tl-badge.next{background:rgba(230,57,70,.12);color:var(--c);border:1px solid rgba(230,57,70,.25)}
 
-        /* ══ DISCORD CTA ══ */
-        .discord-section { padding: 6rem 0; border-bottom: 1px solid var(--border); }
-        .discord-inner { max-width: 680px; margin: 0 auto; text-align: center; }
-        .discord-icon { width: 64px; height: 64px; border-radius: 16px; background: rgba(88,101,242,.2); border: 1px solid rgba(88,101,242,.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; }
-        .discord-section h2 { font-size: clamp(1.6rem,4vw,2.8rem); font-weight: 900; color: #fff; margin-bottom: .75rem; letter-spacing: -.02em; }
-        .discord-section p { color: rgba(255,255,255,.45); font-size: 1rem; margin-bottom: 2.5rem; max-width: 440px; margin-left: auto; margin-right: auto; }
-        .discord-member-count { display: inline-flex; align-items: center; gap: .6rem; background: rgba(88,101,242,.1); border: 1px solid rgba(88,101,242,.2); color: rgba(255,255,255,.55); font-size: .78rem; font-weight: 600; padding: .4rem 1rem; border-radius: 20px; margin-bottom: 2.5rem; }
-        .discord-member-count .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #5865f2; box-shadow: 0 0 8px #5865f2; animation: discordPulse 2s ease-in-out infinite; }
-        @keyframes discordPulse { 0%,100%{box-shadow:0 0 8px #5865f2;} 50%{box-shadow:0 0 14px #5865f2;} }
-        .discord-form { display: flex; flex-direction: column; gap: 1rem; }
-        @media (min-width: 480px) { .discord-form { flex-direction: row; } }
-        .discord-form input {
-            flex: 1; min-width: 0;
-            background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
-            color: #fff; font-size: 16px; padding: .9rem 1.2rem;
-            border-radius: 12px; outline: none; backdrop-filter: blur(8px);
-            transition: border-color .2s; font-family: inherit;
-        }
-        .discord-form input:focus { border-color: rgba(88,101,242,.6); }
-        .discord-form input::placeholder { color: rgba(255,255,255,.3); }
-        .discord-btn {
-            flex-shrink: 0; padding: .9rem 1.8rem; border-radius: 12px;
-            background: #5865f2; color: #fff; font-weight: 700; font-size: .9rem;
-            border: none; cursor: pointer; font-family: inherit;
-            box-shadow: 0 4px 24px rgba(88,101,242,.35);
-            transition: filter .2s, transform .15s;
-        }
-        .discord-btn:hover { filter: brightness(1.1); }
-        .discord-btn:active { transform: scale(.97); }
-        #discord-success { display: none; padding: 1.2rem; border-radius: 12px; background: rgba(88,101,242,.1); border: 1px solid rgba(88,101,242,.25); }
-        #discord-success p { font-size: .9rem; font-weight: 600; color: #5865f2; }
-        #discord-success span { font-size: .8rem; color: rgba(255,255,255,.4); }
+/* ── SUBSCRIPTION ── */
+.subs{padding:6rem 0;border-bottom:1px solid var(--border)}
+.subs h2{font-size:clamp(1.6rem,4vw,2.8rem);font-weight:900;color:#fff;text-align:center;margin-bottom:.75rem;letter-spacing:-.025em}
+.subs-note{text-align:center;color:rgba(255,255,255,.38);font-size:.9rem;margin-bottom:3.5rem}
+.tiers{display:grid;grid-template-columns:1fr;gap:1.5rem;max-width:880px;margin:0 auto}
+@media(min-width:600px){.tiers{grid-template-columns:1fr 1fr}}
+.tier{border-radius:22px;padding:2.5rem;border:1px solid var(--border);position:relative;overflow:hidden}
+.tier.free{background:rgba(255,255,255,.025)}
+.tier.paid{background:linear-gradient(145deg,rgba(124,58,237,.1),rgba(230,57,70,.07));border-color:rgba(124,58,237,.32)}
+.pop-tag{position:absolute;top:1.25rem;right:1.25rem;font-size:.58rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;background:var(--v);color:#fff;padding:.2rem .6rem;border-radius:4px}
+.tier h3{font-size:.68rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:1.25rem}
+.tier-price{margin-bottom:2rem}
+.tier-price .amt{font-size:clamp(2.5rem,6vw,3.4rem);font-weight:900;color:#fff;line-height:1}
+.tier-price .per{font-size:.88rem;color:rgba(255,255,255,.38);margin-left:.2rem}
+.tier ul{list-style:none;display:flex;flex-direction:column;gap:0;margin-bottom:2rem}
+.tier ul li{display:flex;align-items:flex-start;gap:.65rem;font-size:.88rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.04);color:rgba(255,255,255,.58)}
+.tier ul li:last-child{border-bottom:none}
+.li-icon{width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
+li.yes .li-icon{background:rgba(16,185,129,.18);color:#10b981}
+li.no .li-icon{background:rgba(255,255,255,.05);color:rgba(255,255,255,.2)}
+li.no{color:rgba(255,255,255,.27);text-decoration:line-through;text-decoration-color:rgba(255,255,255,.12)}
+.tier-btn{display:block;text-align:center;padding:1rem;border-radius:12px;font-weight:700;font-size:.9rem;text-decoration:none;transition:filter .2s,transform .15s}
+.tier.free .tier-btn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.65)}
+.tier.paid .tier-btn{background:var(--v);color:#fff;box-shadow:0 4px 26px rgba(124,58,237,.4)}
+.tier-btn:hover{filter:brightness(1.1)}
+.tier-btn:active{transform:scale(.97)}
 
-        /* ══ SUBSCRIBE ══ */
-        .subscribe { padding: 6rem 0; border-bottom: 1px solid var(--border); }
-        .subscribe-inner { max-width: 560px; margin: 0 auto; text-align: center; }
-        .rift-accent { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--crimson), transparent); margin: 0 auto 2.5rem; }
-        .subscribe h2 { font-size: clamp(1.8rem,4.5vw,3.2rem); font-weight: 900; color: #fff; letter-spacing: -.02em; margin-bottom: .75rem; }
-        .subscribe p { color: rgba(255,255,255,.4); font-size: .95rem; margin-bottom: 2.5rem; }
-        .subscribe-form { display: flex; flex-direction: column; gap: 1rem; }
-        @media (min-width: 480px) { .subscribe-form { flex-direction: row; } }
-        .subscribe-form input {
-            flex: 1; min-width: 0;
-            background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
-            color: #fff; font-size: 16px; padding: .9rem 1.2rem;
-            border-radius: 12px; outline: none; backdrop-filter: blur(8px);
-            transition: border-color .2s; font-family: inherit;
-        }
-        .subscribe-form input:focus { border-color: rgba(230,57,70,.55); }
-        .subscribe-form input::placeholder { color: rgba(255,255,255,.3); }
-        #notify-btn {
-            flex-shrink: 0; padding: .9rem 1.8rem; border-radius: 12px;
-            background: var(--crimson); color: #fff; font-weight: 700; font-size: .9rem;
-            border: none; cursor: pointer; font-family: inherit;
-            box-shadow: 0 4px 24px rgba(230,57,70,.35);
-            transition: filter .2s, transform .15s;
-        }
-        #notify-btn:hover { filter: brightness(1.1); }
-        #notify-btn:active { transform: scale(.97); }
-        #subscribe-success { display: none; padding: 1.2rem; border-radius: 12px; background: rgba(16,185,129,.08); border: 1px solid rgba(16,185,129,.25); }
-        #subscribe-success p { font-weight: 600; color: #10b981; }
+/* ── DISCORD ── */
+.discord{padding:6rem 0;border-bottom:1px solid var(--border)}
+.discord-inner{max-width:640px;margin:0 auto;text-align:center}
+.d-icon{width:62px;height:62px;border-radius:16px;background:rgba(88,101,242,.15);border:1px solid rgba(88,101,242,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 2rem}
+.discord h2{font-size:clamp(1.7rem,4vw,2.8rem);font-weight:900;color:#fff;margin-bottom:.75rem;letter-spacing:-.025em}
+.discord p{color:rgba(255,255,255,.42);font-size:.98rem;line-height:1.7;margin-bottom:2rem;max-width:460px;margin-left:auto;margin-right:auto}
+.d-count{display:inline-flex;align-items:center;gap:.55rem;background:rgba(88,101,242,.09);border:1px solid rgba(88,101,242,.2);color:rgba(255,255,255,.5);font-size:.75rem;font-weight:600;padding:.38rem .9rem;border-radius:20px;margin-bottom:2.5rem}
+.d-live{width:7px;height:7px;border-radius:50%;background:#5865f2;box-shadow:0 0 8px #5865f2;animation:livePulse 2s ease-in-out infinite}
+@keyframes livePulse{0%,100%{box-shadow:0 0 7px #5865f2}50%{box-shadow:0 0 14px #5865f2,0 0 28px rgba(88,101,242,.3)}}
+.email-row{display:flex;flex-direction:column;gap:.75rem}
+@media(min-width:480px){.email-row{flex-direction:row}}
+.email-row input,.final-form input{flex:1;min-width:0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;font-size:16px;padding:.9rem 1.2rem;border-radius:12px;outline:none;backdrop-filter:blur(8px);transition:border-color .2s;font-family:inherit}
+.email-row input:focus,.final-form input:focus{border-color:rgba(88,101,242,.55)}
+.email-row input::placeholder,.final-form input::placeholder{color:rgba(255,255,255,.28)}
+.d-btn{flex-shrink:0;padding:.9rem 1.6rem;border-radius:12px;background:#5865f2;color:#fff;font-weight:700;font-size:.88rem;border:none;cursor:pointer;font-family:inherit;box-shadow:0 4px 22px rgba(88,101,242,.32);transition:filter .2s,transform .15s}
+.d-btn:hover{filter:brightness(1.1)}
+.d-btn:active{transform:scale(.97)}
+.success-msg{display:none;padding:1.1rem 1.25rem;border-radius:12px}
+.success-msg.green{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.22)}
+.success-msg.blue{background:rgba(88,101,242,.08);border:1px solid rgba(88,101,242,.22)}
+.success-msg p{font-weight:700;font-size:.9rem}
+.success-msg.green p{color:#10b981}
+.success-msg.blue p{color:#5865f2}
+.success-msg span{font-size:.78rem;color:rgba(255,255,255,.38)}
 
-        /* ══ FOOTER ══ */
-        footer { padding: 3rem 0; }
-        .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; }
-        .footer-logo { font-size: 1.1rem; font-weight: 900; color: #fff; letter-spacing: 2px; }
-        .footer-logo span { color: var(--crimson); }
-        .footer-tagline { font-size: .75rem; margin-top: .25rem; color: rgba(255,255,255,.2); }
-        .footer-links { display: flex; flex-wrap: wrap; gap: 1.5rem; }
-        .footer-links a { font-size: .82rem; color: rgba(255,255,255,.35); text-decoration: none; transition: color .2s; }
-        .footer-links a:hover { color: #fff; }
-        .footer-copy { font-size: .72rem; color: rgba(255,255,255,.15); }
+/* ── FINAL CTA ── */
+.final-cta{padding:6rem 0;border-bottom:1px solid var(--border)}
+.final-inner{max-width:520px;margin:0 auto;text-align:center}
+.final-rift{width:56px;height:1px;background:linear-gradient(90deg,transparent,var(--c),transparent);margin:0 auto 2.5rem}
+.final-cta h2{font-size:clamp(1.9rem,4.5vw,3.2rem);font-weight:900;color:#fff;letter-spacing:-.025em;margin-bottom:.75rem}
+.final-cta .sub{color:rgba(255,255,255,.38);font-size:.95rem;margin-bottom:2.5rem}
+.final-form{display:flex;flex-direction:column;gap:.75rem}
+@media(min-width:480px){.final-form{flex-direction:row}}
+.final-form input:focus{border-color:rgba(230,57,70,.5)}
+.n-btn{flex-shrink:0;padding:.9rem 1.75rem;border-radius:12px;background:var(--c);color:#fff;font-weight:700;font-size:.9rem;border:none;cursor:pointer;font-family:inherit;box-shadow:0 4px 24px rgba(230,57,70,.35);transition:filter .2s,transform .15s}
+.n-btn:hover{filter:brightness(1.1)}
+.n-btn:active{transform:scale(.97)}
 
-        /* ══ LIGHTBOX ══ */
-        #lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.97); z-index: 200; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem; }
-        #lightbox.active { display: flex; }
-        #lightbox img { max-height: 78vh; max-width: min(500px, 94vw); border-radius: 14px; box-shadow: 0 32px 80px rgba(0,0,0,.7); }
-        .lb-controls { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
-        .lb-btn { width: 44px; height: 44px; border-radius: 12px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.7); font-size: .95rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: color .2s; }
-        .lb-btn:hover { color: #fff; }
-        .lb-btn:disabled { opacity: .25; cursor: default; }
-        .lb-counter { font-size: .82rem; color: rgba(255,255,255,.35); min-width: 50px; text-align: center; font-variant-numeric: tabular-nums; }
-    </style>
+/* ── FOOTER ── */
+footer{padding:3rem 0}
+.foot-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem}
+.foot-logo{font-size:1.1rem;font-weight:900;color:#fff;letter-spacing:2px}
+.foot-logo em{color:var(--c);font-style:normal}
+.foot-tagline{font-size:.72rem;margin-top:.3rem;color:rgba(255,255,255,.18)}
+.foot-links{display:flex;flex-wrap:wrap;gap:1.5rem}
+.foot-links a{font-size:.8rem;color:rgba(255,255,255,.32);text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:#fff}
+.foot-copy{font-size:.7rem;color:rgba(255,255,255,.14)}
+
+/* ── LIGHTBOX ── */
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:200;display:none;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem}
+#lb.on{display:flex}
+#lb-img{max-height:78vh;max-width:min(500px,94vw);border-radius:14px;box-shadow:0 32px 80px rgba(0,0,0,.6);object-fit:contain}
+.lb-bar{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem}
+.lb-btn{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.65);font-size:.95rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:color .2s,border-color .2s}
+.lb-btn:hover{color:#fff;border-color:rgba(255,255,255,.25)}
+.lb-btn:disabled{opacity:.2;cursor:default}
+.lb-ctr{font-size:.8rem;color:rgba(255,255,255,.32);min-width:44px;text-align:center;font-variant-numeric:tabular-nums}
+</style>
 </head>
 <body>
 
-<!-- ══ LOADER ══ -->
+<!-- LOADER -->
 <div id="loader">
-    <svg class="rift-svg" viewBox="0 0 400 50">
-        <path d="M0 25 Q 50 5, 100 25 T 200 25 T 300 25 T 400 25"/>
-    </svg>
-    <h1>RIKU</h1>
+    <svg class="ldr-rift" viewBox="0 0 400 50"><path d="M0 25 Q50 5,100 25 T200 25 T300 25 T400 25"/></svg>
+    <h1>RI<em>K</em>U</h1>
     <p>Red Mist Rising</p>
 </div>
 
-<!-- ══ COUNTDOWN BANNER ══ -->
-<div id="countdown-banner">
-    <span class="badge">Book 2</span>
-    <span class="msg">Red Blood Moon drops in</span>
-    <div class="timer">
-        <div class="cd-unit"><span class="cd-num" id="cd-days">14</span><span class="cd-label">Days</span></div>
+<!-- COUNTDOWN BANNER -->
+<div id="top-bar">
+    <span class="bar-badge">Book 2</span>
+    <span class="bar-msg">Red Blood Moon drops in</span>
+    <div class="cd">
+        <div class="cd-unit"><span class="cd-n" id="cd-d">14</span><span class="cd-lbl">Days</span></div>
         <span class="cd-sep">:</span>
-        <div class="cd-unit"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">Hrs</span></div>
+        <div class="cd-unit"><span class="cd-n" id="cd-h">00</span><span class="cd-lbl">Hrs</span></div>
         <span class="cd-sep">:</span>
-        <div class="cd-unit"><span class="cd-num" id="cd-mins">00</span><span class="cd-label">Min</span></div>
+        <div class="cd-unit"><span class="cd-n" id="cd-m">00</span><span class="cd-lbl">Min</span></div>
         <span class="cd-sep">:</span>
-        <div class="cd-unit"><span class="cd-num" id="cd-secs">00</span><span class="cd-label">Sec</span></div>
+        <div class="cd-unit"><span class="cd-n" id="cd-s">00</span><span class="cd-lbl">Sec</span></div>
     </div>
 </div>
 
-<!-- ══ HEADER ══ -->
-<header id="main-header">
-    <div class="nav-inner">
-        <a href="#" class="logo">RI<span>K</span>U</a>
-        <nav>
-            <div class="nav-links" style="display:flex;gap:2rem;">
-                <a href="#story">Story</a>
-                <a href="#characters">Characters</a>
-                <a href="#preview">Preview</a>
-            </div>
-            <a href="#subscribe" class="nav-sub-btn">Subscribe $9.99/mo</a>
-        </nav>
+<!-- HEADER -->
+<header id="hdr">
+    <div class="nav">
+        <a href="#" class="logo">RI<em>K</em>U</a>
+        <div class="nav-links">
+            <a href="#story">Story</a>
+            <a href="#characters">Characters</a>
+            <a href="#preview">Preview</a>
+            <a href="#subscribe" class="sub-cta">$9.99 / month</a>
+        </div>
     </div>
 </header>
 
-<!-- ══ HERO ══ -->
+<!-- HERO -->
 <section id="hero">
-    <canvas id="particle-canvas"></canvas>
+    <canvas id="pc"></canvas>
     <div class="hero-glow"></div>
-    <svg class="hero-rift" viewBox="0 0 1440 100">
-        <path d="M-50 50 Q 180 -20, 360 50 T 720 50 T 1080 50 T 1490 50"/>
-    </svg>
-    <div class="hero-content">
-        <p class="hero-eyebrow">Book 1 Complete &nbsp;&bull;&nbsp; Book 2 Coming April 15</p>
-        <h1>RI<span class="k">K</span>U</h1>
-        <div class="hero-divider">
-            <div class="line" style="background:linear-gradient(90deg,transparent,rgba(124,58,237,.6))"></div>
+    <svg class="hero-rift" viewBox="0 0 1440 100"><path d="M-50 50 Q180 -20,360 50 T720 50 T1080 50 T1490 50"/></svg>
+    <div class="hc">
+        <p class="h-eye">Book 1 Complete &nbsp;&bull;&nbsp; Book 2 · April 15</p>
+        <h1>RI<em>K</em>U</h1>
+        <div class="h-div">
+            <div class="line" style="background:linear-gradient(90deg,transparent,rgba(124,58,237,.55))"></div>
             <div class="dot"></div>
-            <div class="line" style="background:linear-gradient(90deg,rgba(124,58,237,.6),transparent)"></div>
+            <div class="line" style="background:linear-gradient(90deg,rgba(124,58,237,.55),transparent)"></div>
         </div>
-        <p class="hero-tagline">Every night the world tears open.<br>Every night, she stitches it back together.</p>
-        <div class="hero-stats">
-            <div class="hero-stat"><span class="val">16,452</span><span class="lbl">fans</span></div>
-            <div class="stat-sep"></div>
-            <div class="hero-stat"><span class="val">8</span><span class="lbl">chapters</span></div>
-            <div class="stat-sep"></div>
-            <div class="book1-badge"><span class="dot"></span> Book 1 Complete</div>
+        <p class="h-tag">Every night the world tears open.<br>Every night, she stitches it back together.</p>
+        <div class="h-proof">
+            <div class="h-stat"><strong>16,452</strong> fans</div>
+            <div class="h-sep"></div>
+            <div class="h-stat"><strong>8</strong> chapters</div>
+            <div class="h-sep"></div>
+            <div class="done-badge"><span class="dot"></span>Book 1 Complete</div>
         </div>
-        <div class="hero-btns">
-            <a href="https://jarvis-vobiuslabs.github.io/riku-comic-studio/read/" target="_blank" class="btn-primary">Read Chapter 1 Free</a>
-            <a href="#subscribe" class="btn-secondary">Get Full Access $9.99/mo</a>
+        <div class="h-btns">
+            <a href="https://jarvis-vobiuslabs.github.io/riku-comic-studio/read/" target="_blank" rel="noopener" class="btn-p">Read Chapter 1 Free</a>
+            <a href="#subscribe" class="btn-s">Get Full Access — $9.99/mo</a>
         </div>
     </div>
-    <div class="scroll-hint">
-        <svg width="22" height="34" viewBox="0 0 22 34" fill="none">
-            <rect x="1.5" y="1.5" width="19" height="31" rx="9.5" stroke="currentColor" stroke-width="1.5"/>
-            <rect x="9.5" y="6" width="3" height="8" rx="1.5" fill="currentColor" opacity=".6"/>
-        </svg>
+    <div class="scroll-cue">
+        <svg width="22" height="34" viewBox="0 0 22 34" fill="none"><rect x="1.5" y="1.5" width="19" height="31" rx="9.5" stroke="currentColor" stroke-width="1.5"/><rect x="9.5" y="6" width="3" height="8" rx="1.5" fill="currentColor" opacity=".6"/></svg>
     </div>
 </section>
 
-<!-- ══ BOOK 1 COMPLETE BANNER ══ -->
-<div class="release-bar rev">
-    <div class="inner">
-        <div class="left">
-            <div class="check">
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <path d="M4 9l4 4 6-6" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+<!-- BOOK 1 COMPLETE BAR -->
+<div class="b1-bar r">
+    <div class="b1-inner">
+        <div class="b1-left">
+            <div class="b1-check">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9l3.5 3.5L14 5" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <div class="text">
-                <strong>Book 1 — Red Mist Rising is complete</strong>
-                <span>8 chapters · Released bi-weekly · Subscribers got early access</span>
-            </div>
+            <div class="b1-text"><strong>Book 1 — Red Mist Rising is complete</strong><span>8 chapters · bi-weekly · subscribers got each chapter early</span></div>
         </div>
-        <div class="chapters">
-            <span class="ch-pill done">Ch.1</span>
-            <span class="ch-pill done">Ch.2</span>
-            <span class="ch-pill done">Ch.3</span>
-            <span class="ch-pill done">Ch.4</span>
-            <span class="ch-pill done">Ch.5</span>
-            <span class="ch-pill done">Ch.6</span>
-            <span class="ch-pill done">Ch.7</span>
-            <span class="ch-pill done">Ch.8</span>
-            <span class="ch-pill current">Book 2 →</span>
+        <div class="ch-pills">
+            <span class="pill done">Ch.1</span><span class="pill done">Ch.2</span><span class="pill done">Ch.3</span>
+            <span class="pill done">Ch.4</span><span class="pill done">Ch.5</span><span class="pill done">Ch.6</span>
+            <span class="pill done">Ch.7</span><span class="pill done">Ch.8</span><span class="pill next">Book 2 →</span>
         </div>
     </div>
 </div>
 
 <main>
 
-    <!-- ══ SOCIAL PROOF ══ -->
-    <section class="social-proof rev">
-        <div class="stats-grid">
-            <div class="stat-box">
-                <div class="number">16,<span>452</span></div>
-                <div class="desc">Active Fans</div>
+<!-- STORY -->
+<section class="story r" id="story">
+    <div class="wrap">
+        <div class="story-grid">
+            <div class="story-q">
+                <p class="sec-label">The Story</p>
+                <h2>The first rift took her mother.<br><span class="dim">Now she hunts them all.</span></h2>
             </div>
-            <div class="stat-box">
-                <div class="number">8</div>
-                <div class="desc">Chapters Released</div>
-            </div>
-            <div class="stat-box">
-                <div class="number">4.<span>9</span></div>
-                <div class="desc">Avg Reader Rating</div>
-            </div>
-            <div class="stat-box">
-                <div class="number">2<span>wk</span></div>
-                <div class="desc">Release Cadence</div>
+            <div class="story-body r d2">
+                <p>Every night at 2 AM, dimensional rifts tear open above Tokyo. Creatures called Hollows pour through. Riku, 17, is the city's only defender — and it's her fault. Three months ago she accidentally opened the first rift and her mother disappeared inside.</p>
+                <p>She's been fighting alone ever since. Her katana Akagiri has started to glow red from absorbed monster energy. SHINKEN, a secret organization, is closing in. And something ancient came through the permanent Rift — and called her by name.</p>
+                <div class="story-tags">
+                    <span class="stag">Action</span><span class="stag">Supernatural</span><span class="stag">Shonen</span><span class="stag">Book 1 Complete</span>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ══ SUBSCRIPTION ══ -->
-    <section class="subscription" id="subscribe">
-        <div class="container">
-            <p class="story-label rev" style="text-align:center">Full Access</p>
-            <h2 class="rev d1">Read every chapter as it drops.</h2>
-            <p class="sub-note rev d2">Chapter 1 is free. Subscribe to unlock the full series — new chapters every 2 weeks.</p>
-            <div class="tiers rev d3">
-                <div class="tier free">
-                    <h3>Free</h3>
-                    <div class="price">
-                        <span class="amount">$0</span>
-                    </div>
-                    <ul>
-                        <li class="has"><span class="icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>Chapter 1 access</li>
-                        <li class="has"><span class="icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>Email notifications</li>
-                        <li class="no"><span class="icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M3 3l4 4M7 3l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></span>Chapters 2–8</li>
-                        <li class="no"><span class="icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M3 3l4 4M7 3l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></span>Book 2 early access</li>
-                        <li class="no"><span class="icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M3 3l4 4M7 3l-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/></svg></span>Discord community</li>
-                    </ul>
-                    <a href="https://jarvis-vobiuslabs.github.io/riku-comic-studio/read/" target="_blank" class="tier-btn">Read Chapter 1</a>
-                </div>
-                <div class="tier paid">
-                    <span class="popular-badge">Most Popular</span>
-                    <h3>Subscriber</h3>
-                    <div class="price">
-                        <span class="amount">$9.99</span><span class="per">/month</span>
-                    </div>
-                    <ul>
-                        <li class="has"><span class="icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>Full Book 1 (all 8 chapters)</li>
-                        <li class="has"><span class="icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>Book 2 early access Apr 15</li>
-                        <li class="has"><span class="icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>New chapters every 2 weeks</li>
-                        <li class="has"><span class="icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>Discord community access</li>
-                        <li class="has"><span class="icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2.5 2.5L8 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>Cancel anytime</li>
-                    </ul>
-                    <a href="#discord-section" class="tier-btn">Get Full Access</a>
-                </div>
-            </div>
+<!-- CHAPTER PREVIEW -->
+<section class="preview r" id="preview">
+    <div class="wrap">
+        <div class="prev-hdr">
+            <div><p class="sec-label">Chapter 1 — Free to Read</p><h2>Get a taste.</h2></div>
+            <a href="https://jarvis-vobiuslabs.github.io/riku-comic-studio/read/" target="_blank" rel="noopener" class="prev-link">Full preview →</a>
         </div>
-    </section>
+        <div class="strip">
+            <img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_01.jpg" alt="Page 1">
+            <img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_02.jpg" alt="Page 2">
+            <img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_03.jpg" alt="Page 3">
+            <img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_04.jpg" alt="Page 4">
+            <a href="https://jarvis-vobiuslabs.github.io/riku-comic-studio/read/" target="_blank" rel="noopener" class="strip-more">
+                <div class="arr">→</div>
+                <p>Continue<br>reading</p>
+            </a>
+        </div>
+    </div>
+</section>
 
-    <!-- ══ STORY ══ -->
-    <section class="story rev" id="story">
-        <div class="container">
-            <div class="story-inner">
-                <div class="story-quote">
-                    <p class="story-label">The Story</p>
-                    <h2>The first rift took her mother.<br><span class="dim">Now she hunts them all.</span></h2>
-                </div>
-                <div class="story-body">
-                    <p>Every night at 2 AM, the sky above Tokyo cracks open. Dimensional rifts tear through the fabric of reality and Hollows — creatures of pure destruction — pour into our world.</p>
-                    <p>Riku, 17, stands as the city's only defender. Three months ago she accidentally opened the first rift and her mother disappeared inside. She has fought alone ever since. Her katana Akagiri has started to glow red. SHINKEN is closing in. And something ancient came through the permanent Rift — and it knows her name.</p>
-                    <div class="story-tags">
-                        <span class="tag">Action</span>
-                        <span class="tag">Supernatural</span>
-                        <span class="tag">Shonen</span>
-                        <span class="tag">Book 1 Complete</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- STATS -->
+<section class="stats-sec">
+    <div class="stats-grid">
+        <div class="stat-box r"><div class="stat-n" data-target="16452" data-suffix=""><em>0</em></div><div class="stat-d">Active Readers</div></div>
+        <div class="stat-box r d1"><div class="stat-n" data-target="8" data-suffix=""><em>0</em></div><div class="stat-d">Chapters Released</div></div>
+        <div class="stat-box r d2"><div class="stat-n" data-target="49" data-suffix="" data-decimal="true"><em>0</em></div><div class="stat-d">Avg Rating</div></div>
+        <div class="stat-box r d3"><div class="stat-n" data-target="2" data-suffix="wk"><em>0</em></div><div class="stat-d">Release Cadence</div></div>
+    </div>
+</section>
 
-    <!-- ══ RELEASE SCHEDULE ══ -->
-    <section class="schedule rev" id="schedule">
-        <div class="container">
-            <p class="story-label">Book 1 — Complete</p>
-            <h2>Bi-weekly releases. Every chapter on schedule.</h2>
-            <div class="schedule-grid">
-                <div class="sched-card done">
-                    <div class="ch-tag">Chapter 1 — Released</div>
-                    <h3>The First Rift</h3>
-                    <div class="date">Feb 5, 2026 · Free to read</div>
-                </div>
-                <div class="sched-card done">
-                    <div class="ch-tag">Chapter 2 — Released</div>
-                    <h3>Akagiri Awakens</h3>
-                    <div class="date">Feb 19, 2026</div>
-                </div>
-                <div class="sched-card done">
-                    <div class="ch-tag">Chapter 3 — Released</div>
-                    <h3>The Shadow in Smoke</h3>
-                    <div class="date">Mar 5, 2026</div>
-                </div>
-                <div class="sched-card done">
-                    <div class="ch-tag">Chapter 4–8 — Released</div>
-                    <h3>Red Mist Rising (Final Arc)</h3>
-                    <div class="date">Mar 5 – Apr 1, 2026 · Book 1 Complete</div>
-                </div>
-                <div class="sched-card next">
-                    <div class="ch-tag">Book 2 — Chapter 1</div>
-                    <h3>Red Blood Moon</h3>
-                    <div class="date">April 15, 2026 · Subscribers only</div>
-                </div>
-                <div class="sched-card upcoming">
-                    <div class="ch-tag">Book 2 — Ongoing</div>
-                    <h3>New chapter every 2 weeks</h3>
-                    <div class="date">April 2026 onwards</div>
-                </div>
-            </div>
+<!-- CHARACTERS -->
+<section class="chars r" id="characters">
+    <div class="wrap">
+        <p class="sec-label">The Cast</p>
+        <h2>Characters</h2>
+        <div class="char-row r d1">
+            <div class="char-n">01</div>
+            <div class="char-id"><div class="char-role">The Hunter</div><div class="char-name">RIKU</div></div>
+            <div class="char-vr"></div>
+            <p class="char-desc">Seventeen. Crimson hair, golden eyes. Three months of solo hunting since the night she lost her mother to the first rift. Her katana Akagiri absorbs the energy of every defeated Hollow — it started glowing red last week. She doesn't ask for help. She doesn't stop.</p>
         </div>
-    </section>
+        <div class="char-row r d2">
+            <div class="char-n">02</div>
+            <div class="char-id"><div class="char-role">The Rival</div><div class="char-name">KAI</div></div>
+            <div class="char-vr"></div>
+            <p class="char-desc">Unknown origin. No affiliation. He moves through Tokyo like smoke and leaves no trace. He's the first person who has ever matched Riku in combat. His motives are unclear — and that makes him more dangerous than any Hollow she's faced.</p>
+        </div>
+        <div class="char-row r d3">
+            <div class="char-n">03</div>
+            <div class="char-id"><div class="char-role">The Threat</div><div class="char-name">THE HOLLOW KING</div></div>
+            <div class="char-vr"></div>
+            <p class="char-desc">Ancient. Massive. It emerged from the permanent Rift and didn't just attack — it stood still and spoke. It knows Riku's name. It mentioned her mother. It is patient in a way that implies it has been waiting for a very long time.</p>
+        </div>
+    </div>
+</section>
 
-    <!-- ══ CHAPTER PREVIEW ══ -->
-    <section class="preview rev" id="preview">
-        <div class="container">
-            <div class="preview-header">
-                <div>
-                    <p class="story-label">Chapter 1 — Free Preview</p>
-                    <h2>Read it now.</h2>
+<!-- REVIEWS -->
+<section class="reviews r">
+    <div class="wrap">
+        <p class="sec-label">Reader Reviews</p>
+        <h2>16,452 fans and counting.</h2>
+        <div class="rev-grid">
+            <div class="rev-card r d1">
+                <div class="rev-stars">
+                    <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
+                    <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
+                    <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
+                    <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
+                    <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
                 </div>
-                <a href="https://jarvis-vobiuslabs.github.io/riku-comic-studio/read/" target="_blank" class="preview-link">Full preview →</a>
+                <p class="rev-q">"Chapter 3 absolutely destroyed me. The pacing is insane — every bi-weekly drop feels like an event. I cleared my evening every time a new one came out."</p>
+                <div class="rev-author">
+                    <div class="rev-av" style="background:rgba(230,57,70,.28)">A</div>
+                    <div><span class="rev-name">Alex M.</span><span class="rev-handle">@alexmanga · Subscriber since Ch.1</span></div>
+                </div>
             </div>
-            <div class="preview-strip">
-                <img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_01.jpg" alt="Page 1">
-                <img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_02.jpg" alt="Page 2">
-                <img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_03.jpg" alt="Page 3">
-                <img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_04.jpg" alt="Page 4">
-                <a href="https://jarvis-vobiuslabs.github.io/riku-comic-studio/read/" target="_blank" class="preview-more">
-                    <div class="arrow-circle">→</div>
-                    <p>More pages<br>inside</p>
-                </a>
+            <div class="rev-card r d2">
+                <div class="rev-stars">
+                    <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
+                    <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
+                    <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
+                    <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
+                    <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
+                </div>
+                <p class="rev-q">"Riku is one of the most compelling protagonists I've read in years. The art direction is cinematic, the story is tight. The $9.99 sub is absolutely worth it — easily."</p>
+                <div class="rev-author">
+                    <div class="rev-av" style="background:rgba(124,58,237,.28)">S</div>
+                    <div><span class="rev-name">Sarah K.</span><span class="rev-handle">@sk_reads · Verified Subscriber</span></div>
+                </div>
+            </div>
+            <div class="rev-card r d3">
+                <div class="rev-stars">
+                    <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
+                    <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
+                    <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
+                    <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
+                    <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
+                </div>
+                <p class="rev-q">"The Hollow King reveal at the end of Book 1 is the best cliffhanger in manga this year. I literally said 'no way' out loud. April 15 cannot come fast enough."</p>
+                <div class="rev-author">
+                    <div class="rev-av" style="background:rgba(59,130,246,.28)">J</div>
+                    <div><span class="rev-name">Jordan T.</span><span class="rev-handle">@jordantakeshi · Subscriber since Ch.2</span></div>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ══ CHARACTERS ══ -->
-    <section class="characters rev" id="characters">
-        <div class="container">
-            <p class="story-label">The Cast</p>
-            <h2>Characters</h2>
-            <div class="char-row">
-                <div class="char-num">01</div>
-                <div class="char-identity">
-                    <div class="char-role">The Hunter</div>
-                    <div class="char-name">RIKU</div>
-                </div>
-                <div class="char-divider"></div>
-                <p class="char-desc">Seventeen years old, crimson hair, golden eyes. Three months of solo hunting since the accident. Her katana Akagiri absorbs the energy of defeated monsters — and has started to glow red. She doesn't ask for help. She doesn't stop.</p>
+<!-- RELEASE TIMELINE -->
+<section class="schedule r" id="schedule">
+    <div class="wrap">
+        <p class="sec-label">Release History</p>
+        <h2>Every chapter, on time, every two weeks.</h2>
+        <div class="timeline">
+            <div class="tl-row">
+                <div class="tl-left"><div class="tl-dot done"></div><div class="tl-line done"></div></div>
+                <div class="tl-right"><div class="tl-date done">Feb 5, 2026</div><div class="tl-title">Ch.1 — The First Rift</div><div class="tl-sub">Free to read</div><span class="tl-badge done">Released</span></div>
             </div>
-            <div class="char-row">
-                <div class="char-num">02</div>
-                <div class="char-identity">
-                    <div class="char-role">The Rival</div>
-                    <div class="char-name">KAI</div>
-                </div>
-                <div class="char-divider"></div>
-                <p class="char-desc">Unknown origin. No affiliation. He moves through Tokyo like smoke and leaves no trace. He's the first person who has ever matched Riku in combat. His motives remain unclear — and that makes him more dangerous than any Hollow.</p>
+            <div class="tl-row">
+                <div class="tl-left"><div class="tl-dot done"></div><div class="tl-line done"></div></div>
+                <div class="tl-right"><div class="tl-date done">Feb 19, 2026</div><div class="tl-title">Ch.2 — Akagiri Awakens</div><div class="tl-sub">Subscribers early · Public +3 days</div><span class="tl-badge done">Released</span></div>
             </div>
-            <div class="char-row">
-                <div class="char-num">03</div>
-                <div class="char-identity">
-                    <div class="char-role">The Threat</div>
-                    <div class="char-name">THE HOLLOW KING</div>
-                </div>
-                <div class="char-divider"></div>
-                <p class="char-desc">Ancient. Massive. It came through the permanent Rift and it didn't just attack — it stood still and spoke. It knows Riku's name. It mentioned her mother. It is patient in a way that suggests it has been waiting a very long time.</p>
+            <div class="tl-row">
+                <div class="tl-left"><div class="tl-dot done"></div><div class="tl-line done"></div></div>
+                <div class="tl-right"><div class="tl-date done">Mar 5, 2026</div><div class="tl-title">Ch.3 — The Shadow in Smoke</div><div class="tl-sub">Kai's introduction</div><span class="tl-badge done">Released</span></div>
+            </div>
+            <div class="tl-row">
+                <div class="tl-left"><div class="tl-dot done"></div><div class="tl-line done"></div></div>
+                <div class="tl-right"><div class="tl-date done">Mar 5 – Apr 1, 2026</div><div class="tl-title">Ch.4–8 — Red Mist Rising (Final Arc)</div><div class="tl-sub">Book 1 concluded · The Hollow King revealed</div><span class="tl-badge done">Book 1 Complete</span></div>
+            </div>
+            <div class="tl-row">
+                <div class="tl-left"><div class="tl-dot next"></div><div class="tl-line future"></div></div>
+                <div class="tl-right"><div class="tl-date next">April 15, 2026</div><div class="tl-title">Book 2 — Red Blood Moon · Ch.1</div><div class="tl-sub">Subscribers only at midnight</div><span class="tl-badge next">14 Days Away</span></div>
+            </div>
+            <div class="tl-row">
+                <div class="tl-left"><div class="tl-dot future"></div><div class="tl-line future"></div></div>
+                <div class="tl-right"><div class="tl-date future">April 2026 →</div><div class="tl-title future">New chapter every 2 weeks</div><div class="tl-sub">Ongoing throughout 2026</div></div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ══ READER REVIEWS ══ -->
-    <section class="reviews rev">
-        <div class="container">
-            <p class="story-label">What Readers Are Saying</p>
-            <h2>16,452 fans and counting.</h2>
-            <div class="review-grid" style="margin-top:2.5rem">
-                <div class="review-card">
-                    <div class="review-stars">
-                        <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
-                        <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
-                        <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
-                        <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
-                        <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
-                    </div>
-                    <p class="review-text">"Chapter 3 absolutely destroyed me. The pacing in this series is insane — every bi-weekly drop feels like an event. Cannot wait for Book 2."</p>
-                    <div class="review-author">
-                        <div class="review-avatar" style="background:rgba(230,57,70,.3)">A</div>
-                        <div><div class="review-name">Alex M.</div><div class="review-handle">@alexmanga · Subscriber since Ch.1</div></div>
-                    </div>
-                </div>
-                <div class="review-card">
-                    <div class="review-stars">
-                        <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
-                        <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
-                        <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
-                        <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
-                        <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
-                    </div>
-                    <p class="review-text">"Riku is one of the most compelling protagonists I've read in years. The art direction is cinematic. The $9.99 sub is absolutely worth it."</p>
-                    <div class="review-author">
-                        <div class="review-avatar" style="background:rgba(124,58,237,.3)">S</div>
-                        <div><div class="review-name">Sarah K.</div><div class="review-handle">@sk_reads · Verified Subscriber</div></div>
-                    </div>
-                </div>
-                <div class="review-card">
-                    <div class="review-stars">
-                        <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
-                        <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
-                        <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
-                        <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
-                        <svg class="star" viewBox="0 0 14 14" fill="#f59e0b"><path d="M7 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6L7 9.3 3.8 11l.6-3.6L1.8 4.8l3.6-.5z"/></svg>
-                    </div>
-                    <p class="review-text">"The Hollow King reveal at the end of Book 1 is the best cliffhanger in manga this year. Already counting down to April 15."</p>
-                    <div class="review-author">
-                        <div class="review-avatar" style="background:rgba(59,130,246,.3)">J</div>
-                        <div><div class="review-name">Jordan T.</div><div class="review-handle">@jordantakeshi · Subscriber since Ch.2</div></div>
-                    </div>
-                </div>
+<!-- SUBSCRIPTION -->
+<section class="subs r" id="subscribe">
+    <div class="wrap">
+        <p class="sec-label" style="text-align:center">Full Access</p>
+        <h2>Read every chapter as it drops.</h2>
+        <p class="subs-note">Chapter 1 is always free. Subscribe for the rest — new chapters every 2 weeks.</p>
+        <div class="tiers">
+            <div class="tier free r d1">
+                <h3>Free</h3>
+                <div class="tier-price"><span class="amt">$0</span></div>
+                <ul>
+                    <li class="yes"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Chapter 1 forever</li>
+                    <li class="yes"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Release notifications</li>
+                    <li class="no"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M2 2l5 5M7 2l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>Chapters 2–8</li>
+                    <li class="no"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M2 2l5 5M7 2l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>Book 2 early access</li>
+                    <li class="no"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M2 2l5 5M7 2l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>Discord community</li>
+                </ul>
+                <a href="https://jarvis-vobiuslabs.github.io/riku-comic-studio/read/" target="_blank" rel="noopener" class="tier-btn">Read Chapter 1</a>
+            </div>
+            <div class="tier paid r d2">
+                <span class="pop-tag">Most Popular</span>
+                <h3>Subscriber</h3>
+                <div class="tier-price"><span class="amt">$9.99</span><span class="per">/month</span></div>
+                <ul>
+                    <li class="yes"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Full Book 1 — all 8 chapters</li>
+                    <li class="yes"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Book 2 early access — Apr 15</li>
+                    <li class="yes"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>New chapters every 2 weeks</li>
+                    <li class="yes"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Discord community access</li>
+                    <li class="yes"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Cancel anytime</li>
+                </ul>
+                <a href="#discord-section" class="tier-btn">Subscribe — $9.99/mo</a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ══ DISCORD ══ -->
-    <section class="discord-section rev" id="discord-section">
-        <div class="container">
-            <div class="discord-inner">
-                <div class="discord-icon">
-                    <svg width="32" height="24" viewBox="0 0 32 24" fill="none">
-                        <path d="M27.1 2A26.3 26.3 0 0020.4.5c-.3.5-.6 1.2-.8 1.7a24.3 24.3 0 00-7.2 0C12.2 1.7 11.9 1 11.6.5A26.5 26.5 0 004.9 2C.7 8.2-.4 14.2.1 20.1c2.8 2 5.5 3.2 8.1 4 .7-.9 1.3-1.9 1.8-2.9-.9-.3-1.9-.8-2.8-1.3l.7-.5c5.4 2.5 11.2 2.5 16.5 0l.7.5c-.9.5-1.9.9-2.8 1.3.5 1 1.1 2 1.8 2.9 2.6-.8 5.3-2 8.1-4 .7-6.9-.9-12.9-4.1-18.1zM10.7 16.5c-1.6 0-2.9-1.4-2.9-3.2s1.3-3.2 2.9-3.2c1.6 0 2.9 1.4 2.9 3.2s-1.3 3.2-2.9 3.2zm10.6 0c-1.6 0-2.9-1.4-2.9-3.2s1.3-3.2 2.9-3.2c1.6 0 2.9 1.4 2.9 3.2s-1.3 3.2-2.9 3.2z" fill="#5865F2"/>
-                    </svg>
-                </div>
-                <p class="story-label">Community</p>
-                <h2>Join the RIKU Discord.</h2>
-                <p>Launching alongside Book 2. A private server for subscribers — chapter discussions, Riku art, early teasers, and direct access to the creative team.</p>
-                <div class="discord-member-count">
-                    <span class="live-dot"></span>
-                    <span>Invite-only launch · Book 2 subscribers get priority access</span>
-                </div>
-                <div id="discord-success">
-                    <p>You're on the invite list.</p>
-                    <span>We'll send your Discord invite when the server opens on April 15.</span>
-                </div>
-                <form class="discord-form" id="discord-form">
-                    <input type="email" placeholder="Enter your email for a Discord invite" required>
-                    <button type="submit" class="discord-btn">Get Invited</button>
-                </form>
+<!-- DISCORD -->
+<section class="discord r" id="discord-section">
+    <div class="wrap">
+        <div class="discord-inner">
+            <div class="d-icon">
+                <svg width="30" height="23" viewBox="0 0 30 23" fill="none"><path d="M25.4 1.9A24.8 24.8 0 0019.1.4c-.3.5-.6 1.1-.8 1.6a23 23 0 00-6.8 0A13.5 13.5 0 0010.8.4 24.9 24.9 0 004.6 1.9C.7 7.7-.4 13.3.1 18.8c2.6 1.9 5.2 3 7.7 3.7.6-.8 1.2-1.7 1.7-2.7-.9-.3-1.8-.7-2.6-1.2l.6-.5c5.1 2.3 10.6 2.3 15.5 0l.7.5c-.9.5-1.8.9-2.7 1.2.5.9 1 1.9 1.7 2.7 2.5-.7 5-1.8 7.7-3.7.6-6.5-.8-12-4-17zM10 15.5c-1.5 0-2.7-1.4-2.7-3s1.2-3 2.7-3 2.8 1.4 2.7 3-1.2 3-2.7 3zm10 0c-1.5 0-2.7-1.4-2.7-3s1.2-3 2.7-3 2.8 1.4 2.7 3-1.2 3-2.7 3z" fill="#5865F2"/></svg>
             </div>
+            <p class="sec-label">Community</p>
+            <h2>Join the RIKU Discord.</h2>
+            <p>A private server launching with Book 2 — chapter discussions, fan art, early teasers, and direct access to the creative team. Invite-only for subscribers.</p>
+            <div class="d-count"><span class="d-live"></span>Invite-only · Opening April 15 with Book 2</div>
+            <div id="d-success" class="success-msg blue"><p>You're on the invite list.</p><span>Your Discord invite arrives April 15 at midnight.</span></div>
+            <form class="email-row" id="d-form">
+                <input type="email" placeholder="your@email.com" required>
+                <button type="submit" class="d-btn">Get My Invite</button>
+            </form>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- ══ SUBSCRIBE ══ -->
-    <section class="subscribe rev">
-        <div class="container">
-            <div class="subscribe-inner">
-                <div class="rift-accent"></div>
-                <p class="story-label">Don't miss Book 2</p>
-                <h2>Be first to read<br>Red Blood Moon.</h2>
-                <p>Drops April 15. Subscribers get access at midnight.</p>
-                <div id="subscribe-success">
-                    <p>You're on the list. See you April 15.</p>
-                </div>
-                <form class="subscribe-form" id="subscribe-form">
-                    <input type="email" placeholder="your@email.com" required>
-                    <button type="submit" id="notify-btn">Notify Me</button>
-                </form>
-            </div>
+<!-- FINAL CTA -->
+<section class="final-cta r">
+    <div class="wrap">
+        <div class="final-inner">
+            <div class="final-rift"></div>
+            <p class="sec-label">Don't Miss Book 2</p>
+            <h2>Red Blood Moon.<br>April 15.</h2>
+            <p class="sub">One notification when it drops. Nothing else ever.</p>
+            <div id="sub-success" class="success-msg green"><p>You're on the list.</p><span>See you April 15 at midnight.</span></div>
+            <form class="final-form" id="sub-form">
+                <input type="email" placeholder="your@email.com" required>
+                <button type="submit" class="n-btn">Notify Me</button>
+            </form>
         </div>
-    </section>
+    </div>
+</section>
 
 </main>
 
-<!-- ══ FOOTER ══ -->
+<!-- FOOTER -->
 <footer>
-    <div class="container">
-        <div class="footer-inner">
-            <div>
-                <div class="footer-logo">RI<span>K</span>U</div>
-                <div class="footer-tagline">An original manga series</div>
-            </div>
-            <div class="footer-links">
+    <div class="wrap">
+        <div class="foot-inner">
+            <div><div class="foot-logo">RI<em>K</em>U</div><div class="foot-tagline">An original manga series</div></div>
+            <div class="foot-links">
                 <a href="https://jarvis-vobiuslabs.github.io/riku-comic-studio/read/" target="_blank">Read Free</a>
                 <a href="#subscribe">Subscribe</a>
                 <a href="#characters">Characters</a>
                 <a href="https://jarvis-vobiuslabs.github.io/riku-comic-studio/" target="_blank">Studio</a>
             </div>
-            <div class="footer-copy">© 2026 RIKU Project</div>
+            <div class="foot-copy">© 2026 RIKU Project</div>
         </div>
     </div>
 </footer>
 
-<!-- ══ LIGHTBOX ══ -->
-<div id="lightbox">
-    <div class="lb-controls">
-        <button class="lb-btn" id="lb-prev">←</button>
-        <span class="lb-counter" id="lb-counter">1 / 4</span>
-        <button class="lb-btn" id="lb-next">→</button>
-        <button class="lb-btn" id="lb-close">✕</button>
+<!-- LIGHTBOX -->
+<div id="lb">
+    <div class="lb-bar">
+        <button class="lb-btn" id="lb-p">←</button>
+        <span class="lb-ctr" id="lb-c">1 / 4</span>
+        <button class="lb-btn" id="lb-n">→</button>
+        <button class="lb-btn" id="lb-x">✕</button>
     </div>
     <img id="lb-img" src="" alt="">
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+(function(){
+const $ = id => document.getElementById(id);
 
-    // ── LOADER ──
-    const loader = document.getElementById('loader');
-    setTimeout(() => {
-        loader.style.opacity = '0';
-        loader.addEventListener('transitionend', () => loader.style.display = 'none', { once: true });
-    }, 2600);
+// ── LOADER ──
+const loader = $('loader');
+setTimeout(() => {
+    loader.style.opacity = '0';
+    loader.addEventListener('transitionend', () => loader.style.display = 'none', {once:true});
+}, 2600);
 
-    // ── IOS-SAFE HERO HEIGHT ──
-    const hero = document.getElementById('hero');
-    hero.style.height = window.innerHeight + 'px';
+// ── HERO HEIGHT (iOS-safe) ──
+const hero = $('hero');
+hero.style.height = window.innerHeight + 'px';
 
-    // ── COUNTDOWN ──
-    const target = new Date('2026-04-15T00:00:00');
-    function updateCountdown() {
-        const now = new Date();
-        const diff = target - now;
-        if (diff <= 0) {
-            document.getElementById('countdown-banner').innerHTML =
-                '<span class="badge">Live Now</span><span class="msg">Book 2 — Red Blood Moon is out. Read it now.</span>';
-            return;
-        }
-        const days  = Math.floor(diff / 86400000);
-        const hours = Math.floor((diff % 86400000) / 3600000);
-        const mins  = Math.floor((diff % 3600000)  / 60000);
-        const secs  = Math.floor((diff % 60000)    / 1000);
-        document.getElementById('cd-days').textContent  = String(days).padStart(2,'0');
-        document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
-        document.getElementById('cd-mins').textContent  = String(mins).padStart(2,'0');
-        document.getElementById('cd-secs').textContent  = String(secs).padStart(2,'0');
-    }
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-
-    // ── HEADER SCROLL ──
-    const header = document.getElementById('main-header');
-    window.addEventListener('scroll', () => {
-        header.classList.toggle('scrolled', window.scrollY > 50);
-    }, { passive: true });
-
-    // ── PARTICLE CANVAS ──
-    const canvas = document.getElementById('particle-canvas');
-    const ctx    = canvas.getContext('2d');
-    const colors = ['#e63946', '#7c3aed', 'rgba(255,255,255,0.6)', '#c026d3'];
-    let pts = [];
-    function resize() {
-        canvas.width  = hero.offsetWidth;
-        canvas.height = hero.offsetHeight;
-        initPts();
-    }
-    function initPts() {
-        pts = [];
-        const n = Math.floor((canvas.width * canvas.height) / 18000);
-        for (let i = 0; i < n; i++) {
-            pts.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                r: Math.random() * 1.5 + 0.4,
-                c: colors[Math.floor(Math.random() * colors.length)],
-                s: Math.random() * 0.4 + 0.08,
-                dx: (Math.random() - 0.5) * 0.3,
-            });
+// ── COUNTDOWN (live seconds) ──
+const target = new Date('2026-04-15T00:00:00');
+const els = {d:$('cd-d'),h:$('cd-h'),m:$('cd-m'),s:$('cd-s')};
+function tick() {
+    const diff = target - Date.now();
+    if (diff <= 0) { $('top-bar').innerHTML = '<span class="bar-badge">Live</span><span class="bar-msg">Book 2 — Red Blood Moon is out now.</span>'; return; }
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    const fmt = n => String(n).padStart(2,'0');
+    function set(el, val) {
+        if (el.textContent !== val) {
+            el.classList.remove('tick');
+            void el.offsetWidth;
+            el.classList.add('tick');
+            el.textContent = val;
         }
     }
-    function draw() {
-        requestAnimationFrame(draw);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (const p of pts) {
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = p.c;
-            ctx.fill();
-            p.y -= p.s;
-            p.x += p.dx;
-            if (p.y < -p.r) { p.y = canvas.height + p.r; p.x = Math.random() * canvas.width; }
-        }
+    set(els.d, fmt(d)); set(els.h, fmt(h)); set(els.m, fmt(m)); set(els.s, fmt(s));
+}
+tick(); setInterval(tick, 1000);
+
+// ── HEADER SCROLL ──
+const hdr = $('hdr');
+window.addEventListener('scroll', () => hdr.classList.toggle('s', scrollY > 60), {passive:true});
+
+// ── PARTICLES ──
+const canvas = $('pc');
+const ctx = canvas.getContext('2d');
+const COLS = ['#e63946','#7c3aed','rgba(255,255,255,.62)','#c026d3'];
+let pts = [];
+function resize() {
+    canvas.width = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+    pts = [];
+    const n = Math.floor(canvas.width * canvas.height / 17000);
+    for (let i = 0; i < n; i++) pts.push({
+        x: Math.random()*canvas.width, y: Math.random()*canvas.height,
+        r: Math.random()*1.5+.4, c: COLS[Math.floor(Math.random()*COLS.length)],
+        s: Math.random()*.4+.06, dx: (Math.random()-.5)*.28
+    });
+}
+function draw() {
+    requestAnimationFrame(draw);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for (const p of pts) {
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle = p.c; ctx.fill();
+        p.y -= p.s; p.x += p.dx;
+        if (p.y < -p.r) { p.y = canvas.height+p.r; p.x = Math.random()*canvas.width; }
+        if (p.x < -p.r) p.x = canvas.width+p.r;
+        if (p.x > canvas.width+p.r) p.x = -p.r;
     }
-    resize();
-    draw();
-    window.addEventListener('resize', resize, { passive: true });
+}
+resize(); draw();
+window.addEventListener('resize', resize, {passive:true});
 
-    // ── SCROLL REVEAL ──
-    const revEls = document.querySelectorAll('.rev');
-    const revObs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); revObs.unobserve(e.target); } });
-    }, { threshold: 0.1 });
-    revEls.forEach(el => revObs.observe(el));
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);} }), {threshold:.1});
+document.querySelectorAll('.r').forEach(el => obs.observe(el));
 
-    // ── LIGHTBOX ──
-    const lb     = document.getElementById('lightbox');
-    const lbImg  = document.getElementById('lb-img');
-    const lbCtr  = document.getElementById('lb-counter');
-    const imgs   = document.querySelectorAll('.preview-strip img');
-    let cur = 0;
-    const setImg = i => { cur = i; lbImg.src = imgs[i].src; lbCtr.textContent = `${i+1} / ${imgs.length}`; document.getElementById('lb-prev').disabled = i===0; document.getElementById('lb-next').disabled = i===imgs.length-1; };
-    const open   = i => { setImg(i); lb.style.display = 'flex'; document.body.classList.add('no-scroll'); };
-    const close  = ()  => { lb.style.display = 'none'; document.body.classList.remove('no-scroll'); };
-    imgs.forEach((img, i) => img.addEventListener('click', () => open(i)));
-    document.getElementById('lb-close').addEventListener('click', close);
-    document.getElementById('lb-prev').addEventListener('click', () => { if (cur > 0) setImg(cur - 1); });
-    document.getElementById('lb-next').addEventListener('click', () => { if (cur < imgs.length-1) setImg(cur + 1); });
-    lb.addEventListener('click', e => { if (e.target === lb) close(); });
-    document.addEventListener('keydown', e => {
-        if (!lb.style.display || lb.style.display === 'none') return;
-        if (e.key === 'Escape') close();
-        if (e.key === 'ArrowLeft' && cur > 0) setImg(cur - 1);
-        if (e.key === 'ArrowRight' && cur < imgs.length-1) setImg(cur + 1);
-    });
+// ── ANIMATED STAT COUNTERS ──
+function animCount(el, target, isDecimal, suffix) {
+    const dur = 1800, start = performance.now();
+    function step(now) {
+        const p = Math.min((now - start)/dur, 1);
+        const ease = 1 - Math.pow(1-p, 3);
+        const val = isDecimal ? (ease * target / 10).toFixed(1) : Math.floor(ease * target);
+        el.innerHTML = (isDecimal ? val : val.toLocaleString()) + '<em>' + suffix + '</em>';
+        if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+}
+const countObs = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const t = +el.dataset.target;
+    const suffix = el.dataset.suffix || '';
+    const dec = el.dataset.decimal === 'true';
+    animCount(el, t, dec, suffix);
+    countObs.unobserve(el);
+}), {threshold:.4});
+document.querySelectorAll('.stat-n[data-target]').forEach(el => countObs.observe(el));
 
-    // ── SUBSCRIBE FORM ──
-    document.getElementById('subscribe-form').addEventListener('submit', e => {
-        e.preventDefault();
-        document.getElementById('subscribe-form').style.display = 'none';
-        document.getElementById('subscribe-success').style.display = 'block';
-    });
-
-    // ── DISCORD FORM ──
-    document.getElementById('discord-form').addEventListener('submit', e => {
-        e.preventDefault();
-        document.getElementById('discord-form').style.display = 'none';
-        document.getElementById('discord-success').style.display = 'block';
-    });
-
+// ── LIGHTBOX ──
+const lb = $('lb'), lbImg = $('lb-img'), lbC = $('lb-c');
+const imgs = [...document.querySelectorAll('.strip img')];
+let cur = 0;
+const setImg = i => {
+    cur = i; lbImg.src = imgs[i].src; lbC.textContent = `${i+1} / ${imgs.length}`;
+    $('lb-p').disabled = i===0; $('lb-n').disabled = i===imgs.length-1;
+};
+const open = i => { setImg(i); lb.classList.add('on'); document.body.classList.add('locked'); };
+const close = () => { lb.classList.remove('on'); document.body.classList.remove('locked'); };
+imgs.forEach((img,i) => img.addEventListener('click', () => open(i)));
+$('lb-x').addEventListener('click', close);
+$('lb-p').addEventListener('click', () => { if(cur>0) setImg(cur-1); });
+$('lb-n').addEventListener('click', () => { if(cur<imgs.length-1) setImg(cur+1); });
+lb.addEventListener('click', e => { if(e.target===lb) close(); });
+document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('on')) return;
+    if(e.key==='Escape') close();
+    if(e.key==='ArrowLeft'&&cur>0) setImg(cur-1);
+    if(e.key==='ArrowRight'&&cur<imgs.length-1) setImg(cur+1);
 });
+
+// ── FORMS ──
+$('sub-form').addEventListener('submit', e => { e.preventDefault(); $('sub-form').style.display='none'; $('sub-success').style.display='block'; });
+$('d-form').addEventListener('submit', e => { e.preventDefault(); $('d-form').style.display='none'; $('d-success').style.display='block'; });
+
+})();
 </script>
 </body>
 </html>
