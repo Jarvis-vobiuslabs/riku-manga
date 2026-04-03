@@ -51,7 +51,7 @@ img{max-width:100%;display:block}
 @keyframes fup{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
 
-.cd-sep{font-size:.9rem;font-weight:700;color:var(--c);margin-bottom:.5rem}
+
 
 /* ── HEADER ── */
 header{position:fixed;top:0;left:0;width:100%;padding:1rem 1.5rem;z-index:100;transition:background .3s,backdrop-filter .3s,box-shadow .3s}
@@ -325,15 +325,6 @@ footer{padding:3rem 0}
     <p>Red Mist Rising</p>
 </div>
 
-        <span class="cd-sep">:</span>
-        <div class="cd-unit"><span class="cd-n" id="cd-h">00</span><span class="cd-lbl">Hrs</span></div>
-        <span class="cd-sep">:</span>
-        <div class="cd-unit"><span class="cd-n" id="cd-m">00</span><span class="cd-lbl">Min</span></div>
-        <span class="cd-sep">:</span>
-        <div class="cd-unit"><span class="cd-n" id="cd-s">00</span><span class="cd-lbl">Sec</span></div>
-    </div>
-</div>
-
 <!-- HEADER -->
 <header id="hdr">
     <div class="nav">
@@ -363,13 +354,13 @@ footer{padding:3rem 0}
         <div class="hero-cd">
             <span class="hero-cd-label">Book 2 — Red Blood Moon drops in</span>
             <div class="hero-cd-units">
-                <div class="hero-cd-unit"><span id="cd-d">12</span><span>Days</span></div>
+                <div class="hero-cd-unit"><span id="hcd-d">12</span><span>Days</span></div>
                 <div class="hero-cd-sep">:</div>
-                <div class="hero-cd-unit"><span id="cd-h">00</span><span>Hrs</span></div>
+                <div class="hero-cd-unit"><span id="hcd-h">00</span><span>Hrs</span></div>
                 <div class="hero-cd-sep">:</div>
-                <div class="hero-cd-unit"><span id="cd-m">00</span><span>Min</span></div>
+                <div class="hero-cd-unit"><span id="hcd-m">00</span><span>Min</span></div>
                 <div class="hero-cd-sep">:</div>
-                <div class="hero-cd-unit"><span id="cd-s">00</span><span>Sec</span></div>
+                <div class="hero-cd-unit"><span id="hcd-s">00</span><span>Sec</span></div>
             </div>
         </div>
         <div class="h-proof">
@@ -715,11 +706,11 @@ const hero = $('hero');
 hero.style.height = window.innerHeight + 'px';
 
 // ── COUNTDOWN (live seconds) ──
-const target = new Date('2026-04-15T00:00:00');
-const els = {d:$('cd-d'),h:$('cd-h'),m:$('cd-m'),s:$('cd-s')};
+const target = new Date('2026-04-15T06:00:00Z');
+const els = {d:$('hcd-d'),h:$('hcd-h'),m:$('hcd-m'),s:$('hcd-s')};
 function tick() {
     const diff = target - Date.now();
-    if (diff <= 0) { document.querySelector('.hero-cd').innerHTML = '<span class="hero-cd-label" style="color:var(--c);font-size:.9rem">Book 2 — Red Blood Moon is out now!</span>'; return; }
+    if (diff <= 0) { document.querySelector('.hero-cd').innerHTML = '<span class="hero-cd-label" style="color:var(--c);font-size:.9rem;letter-spacing:.05em">Book 2 — Red Blood Moon is out now!</span>'; return; }
     const d = Math.floor(diff/86400000);
     const h = Math.floor((diff%86400000)/3600000);
     const m = Math.floor((diff%3600000)/60000);
