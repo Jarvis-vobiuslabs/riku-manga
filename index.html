@@ -45,15 +45,7 @@ img{max-width:100%;display:block}
 @keyframes drawLine{to{stroke-dashoffset:0}}
 @keyframes fup{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* ── COUNTDOWN BANNER ── */
-#top-bar{background:linear-gradient(90deg,rgba(124,58,237,.15),rgba(230,57,70,.15));border-bottom:1px solid rgba(230,57,70,.2);padding:.8rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;position:relative;z-index:90}
-.bar-badge{font-size:.6rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;background:var(--c);color:#fff;padding:.2rem .6rem;border-radius:4px;flex-shrink:0}
-.bar-msg{font-size:.82rem;font-weight:600;color:rgba(255,255,255,.75);white-space:nowrap}
-.cd{display:flex;align-items:center;gap:.4rem}
-.cd-unit{display:flex;flex-direction:column;align-items:center;min-width:36px}
-.cd-n{font-size:1rem;font-weight:800;color:#fff;line-height:1;font-variant-numeric:tabular-nums;transition:transform .15s}
-.cd-n.tick{transform:translateY(-2px)}
-.cd-lbl{font-size:.5rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-top:.15rem}
+
 .cd-sep{font-size:.9rem;font-weight:700;color:var(--c);margin-bottom:.5rem}
 
 /* ── HEADER ── */
@@ -305,6 +297,17 @@ footer{padding:3rem 0}
 .lb-btn:hover{color:#fff;border-color:rgba(255,255,255,.25)}
 .lb-btn:disabled{opacity:.2;cursor:default}
 .lb-ctr{font-size:.8rem;color:rgba(255,255,255,.32);min-width:44px;text-align:center;font-variant-numeric:tabular-nums}
+
+/* ── HERO COUNTDOWN ── */
+.hero-cd{display:flex;flex-direction:column;align-items:center;gap:.75rem;margin:.5rem 0 1.5rem;padding:1.2rem 2rem;background:rgba(255,255,255,.04);border:1px solid rgba(230,57,70,.2);border-radius:16px;backdrop-filter:blur(10px)}
+.hero-cd-label{font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.hero-cd-units{display:flex;align-items:center;gap:.5rem}
+.hero-cd-unit{display:flex;flex-direction:column;align-items:center;min-width:48px}
+.hero-cd-unit span:first-child{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:900;color:#fff;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-1px}
+.hero-cd-unit span:last-child{font-size:.5rem;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.3);margin-top:.2rem}
+.hero-cd-sep{font-size:clamp(1.4rem,4vw,2rem);font-weight:900;color:var(--c);line-height:1;margin-bottom:.8rem;opacity:.7}
+@media(max-width:400px){.hero-cd{padding:.9rem 1.2rem}.hero-cd-unit{min-width:38px}}
+
 </style>
 
 </head>
@@ -317,12 +320,6 @@ footer{padding:3rem 0}
     <p>Red Mist Rising</p>
 </div>
 
-<!-- COUNTDOWN BANNER -->
-<div id="top-bar">
-    <span class="bar-badge">Book 2</span>
-    <span class="bar-msg">Red Blood Moon drops in</span>
-    <div class="cd">
-        <div class="cd-unit"><span class="cd-n" id="cd-d">14</span><span class="cd-lbl">Days</span></div>
         <span class="cd-sep">:</span>
         <div class="cd-unit"><span class="cd-n" id="cd-h">00</span><span class="cd-lbl">Hrs</span></div>
         <span class="cd-sep">:</span>
@@ -339,7 +336,7 @@ footer{padding:3rem 0}
         <div class="nav-links">
             <a href="#story">Story</a>
             <a href="#characters">Characters</a>
-            <a href="#preview">Preview</a>
+            
             <a href="#subscribe" class="sub-cta">$9.99 / month</a>
         </div>
     </div>
@@ -358,11 +355,22 @@ footer{padding:3rem 0}
             <div class="dot"></div>
             <div class="line" style="background:linear-gradient(90deg,rgba(124,58,237,.55),transparent)"></div>
         </div>
-        <p class="h-tag">Every night the world tears open.<br>Every night, she stitches it back together.</p>
+        <div class="hero-cd">
+            <span class="hero-cd-label">Book 2 — Red Blood Moon drops in</span>
+            <div class="hero-cd-units">
+                <div class="hero-cd-unit"><span id="cd-d">12</span><span>Days</span></div>
+                <div class="hero-cd-sep">:</div>
+                <div class="hero-cd-unit"><span id="cd-h">00</span><span>Hrs</span></div>
+                <div class="hero-cd-sep">:</div>
+                <div class="hero-cd-unit"><span id="cd-m">00</span><span>Min</span></div>
+                <div class="hero-cd-sep">:</div>
+                <div class="hero-cd-unit"><span id="cd-s">00</span><span>Sec</span></div>
+            </div>
+        </div>
         <div class="h-proof">
             <div class="h-stat"><strong>16,452</strong> fans</div>
             <div class="h-sep"></div>
-            <div class="h-stat"><strong>8</strong> chapters</div>
+            <div class="h-stat"><strong>4</strong> chapters</div>
             <div class="h-sep"></div>
             <div class="done-badge"><span class="dot"></span>Book 1 Complete</div>
         </div>
@@ -386,9 +394,7 @@ footer{padding:3rem 0}
             <div class="b1-text"><strong>Book 1 — Red Mist Rising is complete</strong><span>4 chapters · 80 pages · bi-weekly · subscribers got each chapter early</span></div>
         </div>
         <div class="ch-pills">
-            <span class="pill done">Ch.1</span><span class="pill done">Ch.2</span><span class="pill done">Ch.3</span>
-            <span class="pill done">Ch.4</span><span class="pill done">Ch.5</span><span class="pill done">Ch.6</span>
-            <span class="pill done">Ch.7</span><span class="pill done">Ch.8</span><span class="pill next">Book 2 →</span>
+            <span class="pill done">Ch.1</span><span class="pill done">Ch.2</span><span class="pill done">Ch.3</span><span class="pill done">Ch.4</span><span class="pill next">Book 2 — Apr 15 →</span>
         </div>
     </div>
 </div>
@@ -414,25 +420,7 @@ footer{padding:3rem 0}
     </div>
 </section>
 
-<!-- CHAPTER PREVIEW -->
-<section class="preview r" id="preview">
-    <div class="wrap">
-        <div class="prev-hdr">
-            <div><p class="sec-label">Chapter 1 — Free to Read</p><h2>Get a taste.</h2></div>
-            <a href="https://jarvis-vobiuslabs.github.io/riku-comic-studio/read/" target="_blank" rel="noopener" class="prev-link">Full preview →</a>
-        </div>
-        <div class="strip">
-            <img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_01.jpg" alt="Page 1">
-            <img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_02.jpg" alt="Page 2">
-            <img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_03.jpg" alt="Page 3">
-            <img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_04.jpg" alt="Page 4">
-            <a href="https://jarvis-vobiuslabs.github.io/riku-comic-studio/read/" target="_blank" rel="noopener" class="strip-more">
-                <div class="arr">→</div>
-                <p>Continue<br>reading</p>
-            </a>
-        </div>
-    </div>
-</section>
+
 
 <!-- STATS -->
 <section class="stats-sec">
@@ -629,9 +617,9 @@ footer{padding:3rem 0}
                 <div class="tier-price"><span class="amt">$9.99</span><span class="per">/month</span></div>
                 <ul>
                     <li class="yes"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Full Book 1 — all 4 chapters (80 pages)</li>
-                    <li class="yes"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Book 2 early access — Apr 15</li>
+                    <li class="yes"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Book 2 early access — April 15</li>
                     <li class="yes"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>New chapters every 2 weeks</li>
-                    <li class="yes"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Discord community access</li>
+                    <li class="yes"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Private Discord community</li>
                     <li class="yes"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Cancel anytime</li>
                 </ul>
                 <a href="https://buy.stripe.com/28EaEZfEzgtTf09dBc3cc04" class="tier-btn" target="_blank" rel="noopener">Subscribe — $9.99/mo</a>
@@ -726,7 +714,7 @@ const target = new Date('2026-04-15T00:00:00');
 const els = {d:$('cd-d'),h:$('cd-h'),m:$('cd-m'),s:$('cd-s')};
 function tick() {
     const diff = target - Date.now();
-    if (diff <= 0) { $('top-bar').innerHTML = '<span class="bar-badge">Live</span><span class="bar-msg">Book 2 — Red Blood Moon is out now.</span>'; return; }
+    if (diff <= 0) { document.querySelector('.hero-cd').innerHTML = '<span class="hero-cd-label" style="color:var(--c);font-size:.9rem">Book 2 — Red Blood Moon is out now!</span>'; return; }
     const d = Math.floor(diff/86400000);
     const h = Math.floor((diff%86400000)/3600000);
     const m = Math.floor((diff%3600000)/60000);
