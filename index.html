@@ -22,6 +22,10 @@ body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml
 img{max-width:100%;display:block}
 .wrap{max-width:1200px;margin:0 auto;padding:0 1.5rem}
 
+/* ── CHAPTER READER ── */
+.ch1-page img{width:100%;border-radius:8px;display:block}
+.ch1-page{border-radius:8px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.5)}
+
 /* ── REVEAL ── */
 .r{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
 .r.on{opacity:1;transform:none}
@@ -300,6 +304,13 @@ footer{padding:3rem 0}
 .lb-btn:disabled{opacity:.2;cursor:default}
 .lb-ctr{font-size:.8rem;color:rgba(255,255,255,.32);min-width:44px;text-align:center;font-variant-numeric:tabular-nums}
 </style>
+<script>
+// Always start at top of page
+if (history.scrollRestoration) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+// Prevent hash from jumping on load
+window.addEventListener('load', () => { if (!location.hash) window.scrollTo(0, 0); });
+</script>
 </head>
 <body>
 
@@ -360,7 +371,7 @@ footer{padding:3rem 0}
             <div class="done-badge"><span class="dot"></span>Book 1 Complete</div>
         </div>
         <div class="h-btns">
-            <a href="https://jarvis-vobiuslabs.github.io/riku-comic-studio/read/" target="_blank" rel="noopener" class="btn-p">Read Chapter 1 Free</a>
+            <a href="#read" class="btn-p">Read Chapter 1 Free</a>
             <a href="#subscribe" class="btn-s">Get Full Access — $9.99/mo</a>
         </div>
     </div>
@@ -549,6 +560,48 @@ footer{padding:3rem 0}
     </div>
 </section>
 
+
+<!-- CHAPTER 1 FREE READER -->
+<section id="read" style="padding:4rem 0 0">
+    <div class="wrap">
+        <p class="sec-label" style="text-align:center">Free to Read</p>
+        <h2 style="text-align:center;margin-bottom:.5rem">Chapter 1 — The First Rift</h2>
+        <p style="text-align:center;color:rgba(255,255,255,.4);font-size:.9rem;margin-bottom:3rem">20 pages · The night that changed everything</p>
+    </div>
+    <div style="max-width:800px;margin:0 auto;padding:0 1rem;display:flex;flex-direction:column;gap:.5rem">
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_01.jpg" alt="Chapter 1 — Page 1" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_02.jpg" alt="Chapter 1 — Page 2" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_03.jpg" alt="Chapter 1 — Page 3" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_04.jpg" alt="Chapter 1 — Page 4" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_05.jpg" alt="Chapter 1 — Page 5" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_06.jpg" alt="Chapter 1 — Page 6" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_07.jpg" alt="Chapter 1 — Page 7" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_08.jpg" alt="Chapter 1 — Page 8" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_09.jpg" alt="Chapter 1 — Page 9" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_10.jpg" alt="Chapter 1 — Page 10" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_11.jpg" alt="Chapter 1 — Page 11" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_12.jpg" alt="Chapter 1 — Page 12" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_13.jpg" alt="Chapter 1 — Page 13" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_14.jpg" alt="Chapter 1 — Page 14" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_15.jpg" alt="Chapter 1 — Page 15" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_16.jpg" alt="Chapter 1 — Page 16" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_17.jpg" alt="Chapter 1 — Page 17" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_18.jpg" alt="Chapter 1 — Page 18" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_19.jpg" alt="Chapter 1 — Page 19" loading="lazy"></div>
+<div class="ch1-page r"><img src="https://jarvis-vobiuslabs.github.io/riku-comic-studio/pages/page_20.jpg" alt="Chapter 1 — Page 20" loading="lazy"></div>
+    </div>
+    <!-- CTA after last page -->
+    <div style="background:linear-gradient(180deg,var(--bg) 0%,rgba(230,57,70,.08) 50%,var(--bg) 100%);padding:5rem 1.5rem;text-align:center;margin-top:1rem">
+        <p style="font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1rem">End of Chapter 1</p>
+        <h2 style="font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:.75rem">What happens next?</h2>
+        <p style="max-width:480px;margin:0 auto 2.5rem;color:rgba(255,255,255,.5);line-height:1.7;font-size:1rem">Chapters 2–4 are waiting. The Hollow King, Kai, Director Sable, and the truth about Riku's mother — it's all in Book 1.</p>
+        <a href="https://buy.stripe.com/28EaEZfEzgtTf09dBc3cc04" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.75rem;background:var(--c);color:#fff;font-weight:800;font-size:1.1rem;padding:1.1rem 2.8rem;border-radius:14px;text-decoration:none;box-shadow:0 10px 40px rgba(230,57,70,.35);letter-spacing:.01em">
+            Continue Reading — $9.99/mo
+        </a>
+        <p style="margin-top:1rem;font-size:.78rem;color:rgba(255,255,255,.2)">Cancel anytime · Book 2 drops April 15</p>
+    </div>
+</section>
+
 <!-- BOOK 2 TEASER -->
 <section style="padding:5rem 0;background:linear-gradient(180deg,var(--bg) 0%,rgba(124,58,237,.08) 50%,var(--bg) 100%)" class="r">
     <div class="wrap" style="text-align:center">
@@ -573,23 +626,9 @@ footer{padding:3rem 0}
     <div class="wrap">
         <p class="sec-label" style="text-align:center">Full Access</p>
         <h2>Read every chapter as it drops.</h2>
-        <p class="subs-note">Chapter 1 is always free. Subscribe for the rest — new chapters every 2 weeks.</p>
-        <div class="tiers">
-            <div class="tier free r d1">
-                <h3>Free</h3>
-                <div class="tier-price"><span class="amt">$0</span></div>
-                <ul>
-                    <li class="yes"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Chapter 1 forever</li>
-                    <li class="yes"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Release notifications</li>
-                    <li class="no"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M2 2l5 5M7 2l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>Chapters 2–4</li>
-                    <li class="no"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M2 2l5 5M7 2l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>Book 2 early access</li>
-                    <li class="no"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M2 2l5 5M7 2l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>Book 2 early access</li>
-                    <li class="no"><span class="li-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M2 2l5 5M7 2l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>Discord community</li>
-                </ul>
-                <a href="https://jarvis-vobiuslabs.github.io/riku-comic-studio/read/" target="_blank" rel="noopener" class="tier-btn">Read Chapter 1</a>
-            </div>
-            <div class="tier paid r d2">
-                <span class="pop-tag">Most Popular</span>
+        <p class="subs-note">Read Chapter 1 free below. Subscribe for the full series — new chapters every 2 weeks.</p>
+        <div class="tiers" style="grid-template-columns:1fr;max-width:500px">
+            <div class="tier paid r d1">
                 <h3>Subscriber</h3>
                 <div class="tier-price"><span class="amt">$9.99</span><span class="per">/month</span></div>
                 <ul>
